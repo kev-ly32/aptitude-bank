@@ -1,9 +1,13 @@
 import React from 'react';
 
-function LandingPage(props) {
+function LandingPage() {
     return (
         <div>
-            <h1>Aptitude Bank</h1>
+            <section className='intro-banner'>
+                <div className='container'>
+                    <h1>Take control of your finances</h1>
+                </div>
+            </section>
         </div>
     );
 }

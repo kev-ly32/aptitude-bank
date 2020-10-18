@@ -1,0 +1,27 @@
+.navbar-container {
+  display: flex;
+  height: 6vh;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.nav-brand {
+  flex: 1;
+}
+
+nav {
+  flex: 3;
+  display: flex;
+}
+
+.nav-links {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  list-style: none;
+  margin-right: 10px;
+}
