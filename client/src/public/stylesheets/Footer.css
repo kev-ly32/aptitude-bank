@@ -1,0 +1,27 @@
+footer {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
+
+.footer-section {
+  width: 30%;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2%;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footer-item {
+  list-style: none;
+}
