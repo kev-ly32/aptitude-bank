@@ -1,9 +1,15 @@
+.navbar {
+  background: #e8175d;
+  border-bottom: 1px solid white;
+}
+
 .navbar-container {
   display: flex;
-  height: 6vh;
+  height: 57px;
   align-items: center;
   width: 80%;
   margin: 0 auto;
+  color: white;
 }
 
 .nav-brand {
