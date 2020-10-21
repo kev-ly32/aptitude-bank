@@ -14,6 +14,9 @@
 
 .nav-brand {
   flex: 1;
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
 }
 
 nav {
@@ -25,9 +28,27 @@ nav {
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .nav-link {
   list-style: none;
   margin-right: 10px;
+}
+
+.login-button {
+  color: white;
+  background: none;
+  border: 2px solid white;
+  width: 80px;
+  height: 30px;
+  font-size: 17px;
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+}
+
+.login-button:hover {
+  background: white;
+  color: #e8175d;
 }

@@ -1,6 +1,18 @@
 import React from "react";
 import "../../public/stylesheets/LandingPage.css";
 
+const LandingProducts = ({ title, content }) => {
+  return (
+    <div className="landing-product">
+      <h2>{title}</h2>
+      <h4>{content}</h4>
+      <a href="#" className="product-link">
+        Learn More
+      </a>
+    </div>
+  );
+};
+
 function LandingPage() {
   return (
     <div>
@@ -22,10 +34,26 @@ function LandingPage() {
         </div>
       </section>
       <section className="landingPageProducts">
-        <div className="productInfo">Savings Account</div>
+        <LandingProducts
+          title="Savings"
+          content="Let your money work while you rest"
+        />
+        <LandingProducts
+          title="Chequing"
+          content="No-fee daily chequing. Always ready when you are"
+        />
+        <LandingProducts
+          title="Investments"
+          content="Accelerate your savings. Fast-track your future"
+        />
+        <LandingProducts
+          title="Credit Cards"
+          content="Access exclusive perks when purchasing on credit"
+        />
+        {/* <div className="productInfo">Savings Account</div>
         <div className="productInfo">Chequing Account</div>
         <div className="productInfo">Investments</div>
-        <div className="productInfo">Credit Cards</div>
+        <div className="productInfo">Credit Cards</div> */}
       </section>
     </div>
   );
