@@ -15,7 +15,6 @@ function Login(props) {
               id="card-number"
               required
               type="text"
-              placeholder="Access Card"
               name="card-number"
             />
           </div>
@@ -28,7 +27,6 @@ function Login(props) {
               id="password"
               required
               type="password"
-              placeholder="Password"
               name="password"
             />
           </div>
