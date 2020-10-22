@@ -1,0 +1,23 @@
+.dashboard-intro {
+  display: flex;
+  height: 100px;
+  background: #e9f6ff;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.total-balance {
+  color: #e8175d;
+}
+
+.dashboard-main {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.dashboard-cta {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+}
