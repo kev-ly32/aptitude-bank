@@ -1,9 +1,9 @@
 import React from "react";
-import "../../public/stylesheets/Login.css";
+import "../../public/stylesheets/Auth.css";
 
 function Login(props) {
   return (
-    <div className="login-form">
+    <div className="auth-form">
       <h2 className="form-header">Log In</h2>
       <form>
         <div className="form-row">
@@ -31,7 +31,7 @@ function Login(props) {
             />
           </div>
         </div>
-        <button className="login" type="submit">
+        <button className="auth-submit" type="submit">
           Log In
         </button>
       </form>

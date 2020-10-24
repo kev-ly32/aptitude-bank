@@ -6,9 +6,11 @@ const LandingProducts = ({ title, content }) => {
     <div className="landing-product">
       <h2>{title}</h2>
       <h4>{content}</h4>
-      <a href="#" className="product-link">
-        Learn More
-      </a>
+      <div className="product-link-container">
+        <a href="#" className="product-link">
+          Learn More
+        </a>
+      </div>
     </div>
   );
 };

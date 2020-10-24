@@ -16,7 +16,11 @@ function Navbar(props) {
                 <button className="login-button">Login</button>
               </Link>
             </li>
-            <li className="nav-link">Sign Up</li>
+            <li className="nav-link">
+              <Link to="/register">
+                <button className="register-button">Sign Up</button>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

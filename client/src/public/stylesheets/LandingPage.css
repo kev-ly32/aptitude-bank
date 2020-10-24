@@ -77,10 +77,13 @@
   flex: 3;
 }
 
+.product-link-container {
+  flex: 2;
+}
+
 .product-link {
   font-size: 18px;
   color: black;
-  flex: 2;
 }
 
 .product-link:hover {

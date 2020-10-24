@@ -52,3 +52,20 @@ nav {
   background: white;
   color: #e8175d;
 }
+
+.register-button {
+  color: #e8175d;
+  background: white;
+  border: none;
+  width: 80px;
+  height: 30px;
+  font-size: 17px;
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+}
+
+.register-button:hover {
+  background: #474747;
+  color: white;
+}
