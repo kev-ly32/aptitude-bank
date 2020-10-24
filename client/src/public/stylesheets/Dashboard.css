@@ -19,5 +19,50 @@
   margin-top: 40px;
   display: flex;
   justify-content: space-around;
-  border: 1px solid black;
+}
+
+.dashboard-button {
+  height: 60px;
+  width: 20%;
+  background: #e8175d;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 1px rgb(182, 182, 182);
+  font-size: 15px;
+  padding: 0 4px;
+}
+
+.dashboard-button:hover {
+  background: #474747;
+}
+
+.dashboard-content {
+  margin-top: 20px;
+}
+
+.accounts-header {
+  font-size: 23px;
+  margin-top: 60px;
+}
+
+.account {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  height: 80px;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 1px rgb(182, 182, 182);
+  padding: 0 30px;
+}
+
+.account-number {
+  margin-left: 15px;
+  font-size: 15px;
+}
+
+.account-balance {
+  color: #e8175d;
 }
