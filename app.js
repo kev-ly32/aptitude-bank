@@ -5,9 +5,16 @@ const express = require("express"),
   LocalStrategy = require("passport-local"),
   session = require("express-session"),
   path = require("path"),
+  connectDB = require("./config/db"),
   port = process.env.PORT || 5000;
 
 const User = require("./models/User");
+
+//load config
+dotenv.config({ path: "./config/config.env" });
+
+//connect to database
+connectDB();
 
 //Initialize express parser (body parser) to parse our requests to the server
 app.use(express.urlencoded({ extended: true }));
