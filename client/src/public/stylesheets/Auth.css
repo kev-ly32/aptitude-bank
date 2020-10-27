@@ -62,7 +62,8 @@ label {
   width: 25%;
 }
 
-#password {
+#password,
+#confirm-password {
   font-size: 22px;
 }
 
@@ -92,4 +93,16 @@ label {
   color: white;
   background: #e8175d;
   border: none;
+}
+
+/* remove arrows on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
