@@ -38,8 +38,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("/credit-cards", (req, res) => {
-  res.json({ cards: "look at all the credit cards" });
+app.post("/register", (req, res) => {
+  console.log(req.body);
+  res.json(req.body);
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

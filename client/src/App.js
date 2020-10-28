@@ -12,9 +12,10 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { selectUser } from "./reducers/Authentication/userSlice";
 
 function App() {
-  const isAuthenticated = useSelector((state) => state.authenticated);
+  const user = useSelector(selectUser);
 
   return (
     <div className="App">
@@ -23,12 +24,14 @@ function App() {
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/login" exact>
-            {isAuthenticated ? <Redirect to="/dashboard" /> : <Login />}
+            {user ? <Redirect to="/dashboard" /> : <Login />}
           </Route>
           <Route path="/register" exact>
-            {isAuthenticated ? <Redirect to="/dashboard" /> : <Register />}
+            {user ? <Redirect to="/dashboard" /> : <Register />}
           </Route>
-          <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/dashboard" exact>
+            {!user ? <Redirect to="/login" /> : <Dashboard />}
+          </Route>
         </Switch>
         <Footer />
       </Router>

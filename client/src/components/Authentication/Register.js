@@ -1,11 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import "../../public/stylesheets/Auth.css";
 
-function Register(props) {
+import { loginRegister } from "../../reducers/Authentication/userSlice";
+
+function Register() {
+  const [userInfo, setUserInfo] = useState({
+    "first-name": "",
+    "last-name": "",
+    email: "",
+    "sin-number": "",
+    password: "",
+    "confirm-password": "",
+  });
+  const [err, setErr] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (userInfo.password !== userInfo["confirm-password"]) {
+      return setErr("Passwords do not match.");
+    }
+    try {
+      await dispatch(loginRegister(userInfo));
+    } catch (error) {
+      return setErr(error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="auth-form">
       <h2 className="form-header">Register</h2>
-      <form>
+      <h3>{err}</h3>
+      <form onSubmit={handleSubmit}>
         <div className="form-row form-row-multi">
           <div className="form-item-multi">
             <label htmlFor="first-name">First Name</label>
@@ -16,6 +52,8 @@ function Register(props) {
               required
               type="text"
               name="first-name"
+              value={userInfo["first-name"]}
+              onChange={handleChange}
             />
           </div>
           <div className="form-item-multi">
@@ -26,6 +64,8 @@ function Register(props) {
               required
               type="text"
               name="last-name"
+              value={userInfo["last-name"]}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -38,6 +78,8 @@ function Register(props) {
               required
               type="email"
               name="email"
+              value={userInfo["email"]}
+              onChange={handleChange}
             />
           </div>
           <div className="form-item-multi form-sin">
@@ -48,6 +90,8 @@ function Register(props) {
               required
               type="number"
               name="sin-number"
+              value={userInfo["sin-number"]}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -60,6 +104,8 @@ function Register(props) {
               required
               type="password"
               name="password"
+              value={userInfo["password"]}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -72,6 +118,8 @@ function Register(props) {
               required
               type="password"
               name="confirm-password"
+              value={userInfo["confirm-password"]}
+              onChange={handleChange}
             />
           </div>
         </div>
