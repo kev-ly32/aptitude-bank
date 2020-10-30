@@ -45,14 +45,18 @@ app.post("/register", async (req, res) => {
   const { email, firstName, lastName, sinNumber, password } = req.body;
   const user = new User({ username: email, firstName, lastName, sinNumber });
   //register the user
-  const registeredUser = await User.register(user, password);
-  //authenticate the user after registration
-  req.login(registeredUser, (err) => {
+  const registeredUser = await User.register(user, password, (err, user) => {
     if (err) {
-      return res.json({ err: true, msg: "Error logging in" });
+      return res.json({ err: true, msg: err.message });
     }
-    return res.json(registeredUser);
+    req.login(registeredUser, (err) => {
+      if (err) {
+        return res.json({ err: true, msg: "Error logging in" });
+      }
+      return res.json(registeredUser);
+    });
   });
+  //authenticate the user after registration
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
