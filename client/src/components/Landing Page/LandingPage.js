@@ -7,7 +7,7 @@ const LandingProducts = ({ title, content }) => {
       <h2>{title}</h2>
       <h4>{content}</h4>
       <div className="product-link-container">
-        <a href="#" className="product-link">
+        <a href="/" className="product-link">
           Learn More
         </a>
       </div>
@@ -32,6 +32,7 @@ function LandingPage() {
           <img
             className="intro-image"
             src="https://res.cloudinary.com/de5gzocha/image/upload/v1603159705/Aptitude%20Bank/mom-and-kids_ze3ush.jpg"
+            alt="intro"
           />
         </div>
       </section>

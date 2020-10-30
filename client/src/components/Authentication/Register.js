@@ -1,13 +1,9 @@
-import { authenticate } from "passport";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Auth.css";
 
-import {
-  loginRegister,
-  selectError,
-} from "../../reducers/Authentication/userSlice";
+import { loginRegister } from "../../reducers/Authentication/userSlice";
 
 function Register() {
   const [userInfo, setUserInfo] = useState({
