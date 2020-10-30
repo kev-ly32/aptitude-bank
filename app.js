@@ -4,6 +4,7 @@ const express = require("express"),
   passport = require("passport"),
   LocalStrategy = require("passport-local"),
   session = require("express-session"),
+  bcrypt = require("bcrypt"),
   path = require("path"),
   connectDB = require("./config/db"),
   port = process.env.PORT || 5000;
@@ -38,9 +39,20 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.post("/register", (req, res) => {
-  console.log(req.body);
-  res.json(req.body);
+//register route
+app.post("/register", async (req, res) => {
+  //get form input data from the body
+  const { email, firstName, lastName, sinNumber, password } = req.body;
+  const user = new User({ username: email, firstName, lastName, sinNumber });
+  //register the user
+  const registeredUser = await User.register(user, password);
+  //authenticate the user after registration
+  req.login(registeredUser, (err) => {
+    if (err) {
+      return res.json({ err: true, msg: "Error logging in" });
+    }
+    return res.json(registeredUser);
+  });
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

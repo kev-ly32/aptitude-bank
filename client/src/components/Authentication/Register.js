@@ -6,12 +6,12 @@ import { loginRegister } from "../../reducers/Authentication/userSlice";
 
 function Register() {
   const [userInfo, setUserInfo] = useState({
-    "first-name": "",
-    "last-name": "",
+    firstName: "",
+    lastName: "",
     email: "",
-    "sin-number": "",
+    sinNumber: "",
     password: "",
-    "confirm-password": "",
+    confirmPassword: "",
   });
   const [err, setErr] = useState("");
 
@@ -19,7 +19,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userInfo.password !== userInfo["confirm-password"]) {
+    if (userInfo.password !== userInfo["confirmPassword"]) {
       return setErr("Passwords do not match.");
     }
     try {
@@ -44,27 +44,27 @@ function Register() {
       <form onSubmit={handleSubmit}>
         <div className="form-row form-row-multi">
           <div className="form-item-multi">
-            <label htmlFor="first-name">First Name</label>
+            <label htmlFor="firstName">First Name</label>
             <input
               autoFocus
               className="form-input"
-              id="first-name"
+              id="firstName"
               required
               type="text"
-              name="first-name"
-              value={userInfo["first-name"]}
+              name="firstName"
+              value={userInfo["firstName"]}
               onChange={handleChange}
             />
           </div>
           <div className="form-item-multi">
-            <label htmlFor="last-name">Last Name</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
               className="form-input"
-              id="last-name"
+              id="lastName"
               required
               type="text"
-              name="last-name"
-              value={userInfo["last-name"]}
+              name="lastName"
+              value={userInfo["lastName"]}
               onChange={handleChange}
             />
           </div>
@@ -83,14 +83,14 @@ function Register() {
             />
           </div>
           <div className="form-item-multi form-sin">
-            <label htmlFor="sin-number">SIN Number</label>
+            <label htmlFor="sinNumber">SIN Number</label>
             <input
               className="form-input"
-              id="sin-number"
+              id="sinNumber"
               required
               type="number"
-              name="sin-number"
-              value={userInfo["sin-number"]}
+              name="sinNumber"
+              value={userInfo["sinNumber"]}
               onChange={handleChange}
             />
           </div>
@@ -111,14 +111,14 @@ function Register() {
         </div>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="confirm-password">Confirm Password</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               className="form-input"
-              id="confirm-password"
+              id="confirmPassword"
               required
               type="password"
-              name="confirm-password"
-              value={userInfo["confirm-password"]}
+              name="confirmPassword"
+              value={userInfo["confirmPassword"]}
               onChange={handleChange}
             />
           </div>

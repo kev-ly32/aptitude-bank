@@ -6,9 +6,9 @@ function Navbar(props) {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <a href="/" className="nav-brand">
+        <Link to="/" className="nav-brand">
           Aptitude Bank
-        </a>
+        </Link>
         <nav>
           <ul className="nav-links">
             <li className="nav-link">

@@ -3,12 +3,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const loginRegister = createAsyncThunk(
   "authenticated/authenticate",
   async (user) => {
+    console.log(user);
     const response = await fetch("/register", {
       method: "POST",
       body: JSON.stringify(user),
       headers: { "Content-type": "application/json" },
     });
     const userData = await response.json();
+    if (userData.err) {
+      console.log(userData.msg);
+      return null;
+    }
+    //save user data to state.user
     return userData;
   }
 );
