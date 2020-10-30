@@ -1,8 +1,13 @@
+import { authenticate } from "passport";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Auth.css";
 
-import { loginRegister } from "../../reducers/Authentication/userSlice";
+import {
+  loginRegister,
+  selectError,
+} from "../../reducers/Authentication/userSlice";
 
 function Register() {
   const [userInfo, setUserInfo] = useState({
@@ -14,7 +19,6 @@ function Register() {
     confirmPassword: "",
   });
   const [err, setErr] = useState("");
-
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -23,9 +27,10 @@ function Register() {
       return setErr("Passwords do not match.");
     }
     try {
-      await dispatch(loginRegister(userInfo));
+      const response = await dispatch(loginRegister(userInfo));
+      unwrapResult(response);
     } catch (error) {
-      return setErr(error);
+      setErr(error.message);
     }
   };
 

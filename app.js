@@ -40,23 +40,32 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //register route
-app.post("/register", async (req, res) => {
+app.post("/register", (req, res) => {
   //get form input data from the body
   const { email, firstName, lastName, sinNumber, password } = req.body;
-  const user = new User({ username: email, firstName, lastName, sinNumber });
-  //register the user
-  const registeredUser = await User.register(user, password, (err, user) => {
-    if (err) {
-      return res.json({ err: true, msg: err.message });
+
+  //check if SIN number is registered - needs to be unique
+  User.findOne({ sinNumber }, (err, sin) => {
+    if (sin) {
+      return res.json({ err: true, msg: "SIN number is already registered" });
     }
-    req.login(registeredUser, (err) => {
+    //if SIN number is unique, save a new user model
+    const user = new User({ username: email, firstName, lastName, sinNumber });
+    //register the user
+    User.register(user, password, (err, user) => {
+      //check if email already exists
       if (err) {
-        return res.json({ err: true, msg: "Error logging in" });
+        return res.json({ err: true, msg: "Email is already registered." });
       }
-      return res.json(registeredUser);
+      //authenticate the user after registration
+      req.login(user, (err) => {
+        if (err) {
+          return res.json({ err: true, msg: "Error logging in" });
+        }
+        return res.json(user);
+      });
     });
   });
-  //authenticate the user after registration
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

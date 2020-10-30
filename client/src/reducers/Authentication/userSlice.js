@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const loginRegister = createAsyncThunk(
-  "authenticated/authenticate",
+  "user/authenticate",
   async (user) => {
-    console.log(user);
     const response = await fetch("/register", {
       method: "POST",
       body: JSON.stringify(user),
@@ -11,8 +10,7 @@ export const loginRegister = createAsyncThunk(
     });
     const userData = await response.json();
     if (userData.err) {
-      console.log(userData.msg);
-      return null;
+      throw Error(userData.msg);
     }
     //save user data to state.user
     return userData;
@@ -23,6 +21,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: null,
+    error: null,
   },
   reducers: {
     login: (state, action) => {
@@ -36,10 +35,14 @@ const userSlice = createSlice({
     [loginRegister.fulfilled]: (state, action) => {
       state.user = action.payload;
     },
+    [loginRegister.rejected]: (state, action) => {
+      state.error = action.error;
+    },
   },
 });
 
 export const { login, logout } = userSlice.actions;
 export const selectUser = (state) => state.user.user;
+export const selectError = (state) => state.user.error;
 
 export default userSlice.reducer;
