@@ -68,4 +68,9 @@ app.post("/register", (req, res) => {
   });
 });
 
+//logout route
+app.post("/logout", (req, res) => {
+  req.logout();
+});
+
 app.listen(port, () => console.log(`App listening on port ${port}`));

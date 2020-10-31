@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Auth.css";
 
-import { loginRegister } from "../../reducers/Authentication/userSlice";
+import { authenticate } from "../../reducers/Authentication/userSlice";
 
 function Register() {
   const [userInfo, setUserInfo] = useState({
@@ -23,7 +23,7 @@ function Register() {
       return setErr("Passwords do not match.");
     }
     try {
-      const response = await dispatch(loginRegister(userInfo));
+      const response = await dispatch(authenticate(userInfo));
       unwrapResult(response);
     } catch (error) {
       setErr(error.message);

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loginRegister = createAsyncThunk(
+export const authenticate = createAsyncThunk(
   "user/authenticate",
   async (user) => {
     const response = await fetch("/register", {
@@ -32,10 +32,10 @@ const userSlice = createSlice({
     },
   },
   extraReducers: {
-    [loginRegister.fulfilled]: (state, action) => {
+    [authenticate.fulfilled]: (state, action) => {
       state.user = action.payload;
     },
-    [loginRegister.rejected]: (state, action) => {
+    [authenticate.rejected]: (state, action) => {
       state.error = action.error;
     },
   },
