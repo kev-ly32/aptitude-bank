@@ -1,11 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../public/stylesheets/Navbar.css";
-import { selectUser } from "../../reducers/Authentication/userSlice";
+import { selectUser, logout } from "../../reducers/Authentication/userSlice";
 
 function Navbar() {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    await fetch("/logout", {
+      method: "GET",
+    });
+    dispatch(logout());
+  };
 
   return (
     <div className="navbar">
@@ -30,7 +38,9 @@ function Navbar() {
           ) : (
             <ul className="nav-links">
               <li className="nav-link">
-                <button className="login-button">Logout</button>
+                <button onClick={handleLogout} className="login-button">
+                  Logout
+                </button>
               </li>
             </ul>
           )}
