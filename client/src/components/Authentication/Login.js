@@ -6,7 +6,7 @@ import "../../public/stylesheets/Auth.css";
 import { authenticate } from "../../reducers/Authentication/userSlice";
 
 function Login() {
-  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const [userInfo, setUserInfo] = useState({ username: "", password: "" });
   const [err, setErr] = useState("");
 
   const handleChange = (e) => {
@@ -24,7 +24,7 @@ function Login() {
       const response = await dispatch(authenticate(userInfo));
       unwrapResult(response);
     } catch (error) {
-      setErr(error);
+      setErr(error.message);
     }
   };
 
@@ -41,9 +41,9 @@ function Login() {
               className="form-input"
               id="email"
               required
-              type="text"
-              name="email"
-              value={userInfo.email}
+              type="email"
+              name="username"
+              value={userInfo.username}
               onChange={handleChange}
             />
           </div>

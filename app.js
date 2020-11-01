@@ -57,7 +57,7 @@ app.post("/register", (req, res) => {
       if (err) {
         return res.json({ err: true, msg: "Email is already registered." });
       }
-      //authenticate the user after registration
+      //login user after registration
       req.login(user, (err) => {
         if (err) {
           return res.json({ err: true, msg: "Error logging in" });
@@ -69,8 +69,24 @@ app.post("/register", (req, res) => {
 });
 
 //login route
-app.post("/login", (req, res) => {
-  res.json({ msg: "Trying to log in" });
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user) => {
+    //internal error
+    if (err) {
+      return res.json({ err: true });
+    }
+    //if user cannot be found
+    if (!user) {
+      return res.json({ err: true, msg: "Invalid email or password" });
+    }
+    //login user
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.json({ err: true });
+      }
+      return res.json(user);
+    });
+  })(req, res, next);
 });
 
 //logout route
