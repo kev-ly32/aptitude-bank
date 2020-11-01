@@ -68,6 +68,11 @@ app.post("/register", (req, res) => {
   });
 });
 
+//login route
+app.post("/login", (req, res) => {
+  res.json({ msg: "Trying to log in" });
+});
+
 //logout route
 app.get("/logout", (req, res) => {
   req.logout();

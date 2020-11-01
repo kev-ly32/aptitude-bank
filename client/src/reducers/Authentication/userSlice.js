@@ -3,7 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const authenticate = createAsyncThunk(
   "user/authenticate",
   async (user) => {
-    const response = await fetch("/register", {
+    let url;
+    if (user.sinNumber) {
+      url = "/register";
+    } else {
+      url = "/login";
+    }
+    const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(user),
       headers: { "Content-type": "application/json" },
