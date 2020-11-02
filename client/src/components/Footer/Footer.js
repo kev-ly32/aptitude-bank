@@ -1,22 +1,38 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../public/stylesheets/Footer.css";
 
-function Footer(props) {
+const socials = ["Facebook", "Twitter", "LinkedIn"];
+const footerNav = ["Accounts", "Investments", "Credit Cards", "Contact"];
+
+function Footer() {
   return (
     <footer>
       <section className="footer-section">
         <ul className="footer-social">
-          <li className="footer-item">Facebook</li>
-          <li className="footer-item">Twitter</li>
-          <li className="footer-item">LinkedIn</li>
+          {socials.map((social) => (
+            <a
+              key={social}
+              className="footer-item"
+              href={`https://${social.toLowerCase()}.com/`}
+              target="_blank"
+            >
+              <li>{social}</li>
+            </a>
+          ))}
         </ul>
       </section>
       <section className="footer-section">
         <ul className="footer-nav">
-          <li className="footer-item">Accounts</li>
-          <li className="footer-item">Investments</li>
-          <li className="footer-item">Credit Cards</li>
-          <li className="footer-item">Contact</li>
+          {footerNav.map((page) => (
+            <Link
+              className="footer-item"
+              key={page}
+              to={`/${page.toLowerCase()}`}
+            >
+              <li>{page}</li>
+            </Link>
+          ))}
         </ul>
       </section>
     </footer>

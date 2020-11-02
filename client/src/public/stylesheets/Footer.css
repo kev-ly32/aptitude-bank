@@ -28,4 +28,6 @@ footer {
 
 .footer-item {
   list-style: none;
+  text-decoration: none;
+  color: white;
 }
