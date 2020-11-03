@@ -25,6 +25,7 @@ function Register() {
     try {
       const response = await dispatch(authenticate(userInfo));
       unwrapResult(response);
+      localStorage.setItem("user", JSON.stringify(response.payload));
     } catch (error) {
       setErr(error.message);
     }

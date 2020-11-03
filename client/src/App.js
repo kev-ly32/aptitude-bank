@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import LandingPage from "./components/Landing Page/LandingPage";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authentication/Register";
@@ -12,10 +12,17 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { selectUser } from "./reducers/Authentication/userSlice";
+import { selectUser, login } from "./reducers/Authentication/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+
+  //keep user logged in on page refresh if they didn't click logout
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+    dispatch(login(loggedInUser));
+  }, [dispatch]);
 
   return (
     <div className="App">

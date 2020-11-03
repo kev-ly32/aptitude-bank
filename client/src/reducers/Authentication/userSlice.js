@@ -30,6 +30,9 @@ const userSlice = createSlice({
     error: null,
   },
   reducers: {
+    login: (state, action) => {
+      state.user = action.payload;
+    },
     logout: (state) => {
       state.user = null;
       state.error = null;

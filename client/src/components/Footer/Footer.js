@@ -16,6 +16,7 @@ function Footer() {
               className="footer-item"
               href={`https://${social.toLowerCase()}.com/`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               <li>{social}</li>
             </a>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Auth.css";
@@ -23,10 +23,16 @@ function Login() {
     try {
       const response = await dispatch(authenticate(userInfo));
       unwrapResult(response);
+      localStorage.setItem("user", JSON.stringify(response.payload));
     } catch (error) {
       setErr(error.message);
     }
   };
+
+  //if user sees this page they must be logged out - clear data in storage
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   return (
     <div className="auth-form">
