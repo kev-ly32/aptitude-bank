@@ -6,6 +6,7 @@ import Register from "./components/Authentication/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Transaction from "./components/Accounts/Transaction";
 import {
   BrowserRouter as Router,
   Switch,
@@ -39,6 +40,7 @@ function App() {
           <Route path="/dashboard" exact>
             {!user ? <Redirect to="/login" /> : <Dashboard />}
           </Route>
+          <Route path="/savings/deposit" exact component={Transaction} />
         </Switch>
         <Footer />
       </Router>

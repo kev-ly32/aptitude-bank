@@ -22,6 +22,13 @@ function Navbar() {
           Aptitude Bank
         </Link>
         <nav>
+          {user ? (
+            <li className="nav-link">
+              <Link to="/dashboard">
+                <button>Dashboard</button>
+              </Link>
+            </li>
+          ) : null}
           {!user ? (
             <ul className="nav-links">
               <li className="nav-link">

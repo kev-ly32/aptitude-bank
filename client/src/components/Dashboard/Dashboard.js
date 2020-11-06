@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "../../public/stylesheets/Dashboard.css";
 
-function Dashboard(props) {
+function Dashboard() {
+  const { balance } = useSelector((state) => state.balance);
   return (
     <div>
       <section className="dashboard-intro">
@@ -26,8 +29,18 @@ function Dashboard(props) {
               Everyday Savings
               <span className="account-number">1678 3828394</span>
             </h3>
-            <h4 className="account-balance">$10,500.53</h4>
+            <h4 className="account-balance">
+              {balance.toLocaleString("en-EN", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </h4>
           </div>
+          <Link to="/savings/deposit">
+            <button>Deposit</button>
+          </Link>
           <h1 className="accounts-header">INVESTMENTS</h1>
           <div className="account">
             <h3 className="account-type">
