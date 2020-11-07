@@ -6,6 +6,7 @@ import "../../public/stylesheets/Dashboard.css";
 
 import {
   addSavingsAccount,
+  fetchAccounts,
   selectAccount,
 } from "../../reducers/Account/accountSlice";
 import { selectUser } from "../../reducers/Authentication/userSlice";
@@ -14,6 +15,7 @@ function Dashboard() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const savingsAccount = useSelector(selectAccount);
+  console.log(savingsAccount);
   const tfsa = useSelector((state) => state.account.tfsa);
 
   const addNewAccount = async (e) => {
@@ -36,6 +38,9 @@ function Dashboard() {
   };
 
   //ADD USEEFFECT TO FETCH ACCOUNTS ON RENDER
+  useEffect(() => {
+    dispatch(fetchAccounts({ userID: user.sinNumber }));
+  }, [dispatch, user.sinNumber]);
 
   return (
     <div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../public/stylesheets/Navbar.css";
 import { selectUser, logout } from "../../reducers/Authentication/userSlice";
+import { logout2 } from "../../reducers/Account/accountSlice";
 
 function Navbar() {
   const user = useSelector(selectUser);
@@ -13,6 +14,7 @@ function Navbar() {
       method: "GET",
     });
     dispatch(logout());
+    dispatch(logout2());
   };
 
   return (

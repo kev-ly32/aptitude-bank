@@ -1,5 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+export const fetchAccounts = createAsyncThunk(
+  "account/fetchAccounts",
+  async (userID) => {
+    console.log(userID);
+    const response = await fetch(`/accounts/${userID.userID}`, {
+      method: "GET",
+    });
+    const allAccounts = await response.json();
+    return allAccounts;
+  }
+);
+
 export const addSavingsAccount = createAsyncThunk(
   "account/addSavingsAccount",
   async (data) => {
@@ -19,14 +31,23 @@ const accountSlice = createSlice({
     savings: [],
     tfsa: [],
   },
-  reducers: {},
+  reducers: {
+    logout2: (state) => {
+      state.savings = [];
+      state.tfsa = [];
+    },
+  },
   extraReducers: {
     [addSavingsAccount.fulfilled]: (state, action) => {
-      state.savings = [...state.savings, action.payload];
+      state.savings = state.savings.concat(action.payload);
+    },
+    [fetchAccounts.fulfilled]: (state, action) => {
+      state.savings = state.savings.concat(action.payload);
     },
   },
 });
 
+export const { logout2 } = accountSlice.actions;
 export const selectAccount = (state) => state.account.savings;
 
 export default accountSlice.reducer;
