@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import userReducer from "../reducers/Authentication/userSlice";
-import balanceReducer from "../reducers/Balance/balanceSlice";
+import accountReducer from "../reducers/Account/accountSlice";
 
 export default configureStore({
   reducer: {
     user: userReducer,
-    balance: balanceReducer,
+    account: accountReducer,
   },
 });

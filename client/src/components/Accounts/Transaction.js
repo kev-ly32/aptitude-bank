@@ -27,16 +27,11 @@ function Deposit() {
         </div>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="password">Account</label>
-            <input
-              className="form-input"
-              id="password"
-              required
-              type="password"
-              name="password"
-              //   value={userInfo.password}
-              //   onChange={handleChange}
-            />
+            <label htmlFor="password">Account: </label>
+            <select>
+              <option>Savings Account</option>
+              <option>TFSA</option>
+            </select>
           </div>
         </div>
         <button className="auth-submit" type="submit">

@@ -11,6 +11,7 @@ const express = require("express"),
 
 const User = require("./models/User"),
   authRoutes = require("./routes/auth");
+accountRoutes = require("./routes/accounts");
 
 //load config
 dotenv.config({ path: "./config/config.env" });
@@ -42,5 +43,6 @@ passport.deserializeUser(User.deserializeUser());
 
 //import routes
 app.use(authRoutes);
+app.use(accountRoutes);
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
