@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchAccounts = createAsyncThunk(
   "account/fetchAccounts",
   async (userID) => {
-    console.log(userID);
     const response = await fetch(`/accounts/${userID.userID}`, {
       method: "GET",
     });

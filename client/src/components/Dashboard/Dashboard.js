@@ -15,7 +15,6 @@ function Dashboard() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const savingsAccount = useSelector(selectAccount);
-  console.log(savingsAccount);
   const tfsa = useSelector((state) => state.account.tfsa);
 
   const addNewAccount = async (e) => {

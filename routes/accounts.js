@@ -8,7 +8,6 @@ router.get("/accounts/:userID", (req, res) => {
     if (err) {
       return res.json({ err: true, msg: "Error finding accounts" });
     }
-    console.log(accounts);
     return res.json(accounts);
   });
 });
