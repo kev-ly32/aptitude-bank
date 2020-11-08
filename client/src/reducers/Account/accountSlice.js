@@ -11,8 +11,8 @@ export const fetchAccounts = createAsyncThunk(
   }
 );
 
-export const addSavingsAccount = createAsyncThunk(
-  "account/addSavingsAccount",
+export const addAccount = createAsyncThunk(
+  "account/addAccount",
   async (data) => {
     const response = await fetch("/new-account", {
       method: "POST",
@@ -27,26 +27,24 @@ export const addSavingsAccount = createAsyncThunk(
 const accountSlice = createSlice({
   name: "account",
   initialState: {
-    savings: [],
-    tfsa: [],
+    accounts: [],
   },
   reducers: {
     logout2: (state) => {
-      state.savings = [];
-      state.tfsa = [];
+      state.accounts = [];
     },
   },
   extraReducers: {
-    [addSavingsAccount.fulfilled]: (state, action) => {
-      state.savings = state.savings.concat(action.payload);
+    [addAccount.fulfilled]: (state, action) => {
+      state.accounts = state.accounts.concat(action.payload);
     },
     [fetchAccounts.fulfilled]: (state, action) => {
-      state.savings = state.savings.concat(action.payload);
+      state.accounts = state.accounts.concat(action.payload);
     },
   },
 });
 
 export const { logout2 } = accountSlice.actions;
-export const selectAccount = (state) => state.account.savings;
+export const selectAccount = (state) => state.account.accounts;
 
 export default accountSlice.reducer;

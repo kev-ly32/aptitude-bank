@@ -5,7 +5,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Dashboard.css";
 
 import {
-  addSavingsAccount,
+  addAccount,
   fetchAccounts,
   selectAccount,
 } from "../../reducers/Account/accountSlice";
@@ -14,8 +14,7 @@ import { selectUser } from "../../reducers/Authentication/userSlice";
 function Dashboard() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const savingsAccount = useSelector(selectAccount);
-  const tfsa = useSelector((state) => state.account.tfsa);
+  const allAccounts = useSelector(selectAccount);
 
   const addNewAccount = async (e) => {
     e.preventDefault();
@@ -29,7 +28,7 @@ function Dashboard() {
     const data = { type, id, userID: user.sinNumber, balance: 0 };
 
     try {
-      const response = await dispatch(addSavingsAccount(data));
+      const response = await dispatch(addAccount(data));
       unwrapResult(response);
     } catch (error) {
       console.log(error);
@@ -38,8 +37,10 @@ function Dashboard() {
 
   //ADD USEEFFECT TO FETCH ACCOUNTS ON RENDER
   useEffect(() => {
-    dispatch(fetchAccounts({ userID: user.sinNumber }));
-  }, [dispatch, user.sinNumber]);
+    if (!allAccounts[0]) {
+      dispatch(fetchAccounts({ userID: user.sinNumber }));
+    }
+  }, [allAccounts, dispatch, user.sinNumber]);
 
   return (
     <div>
@@ -63,8 +64,8 @@ function Dashboard() {
           <button name="savings" onClick={addNewAccount}>
             + Add new account
           </button>
-          {savingsAccount[0]
-            ? savingsAccount.map((account) => (
+          {allAccounts[0]
+            ? allAccounts.map((account) => (
                 <div key={account._id} className="account">
                   <h3 className="account-type">
                     Everyday Savings
@@ -88,7 +89,7 @@ function Dashboard() {
           <button name="tfsa" onClick={addNewAccount}>
             + Add new investment
           </button>
-          {tfsa.next ? (
+          {allAccounts.next ? (
             <div className="account">
               <h3 className="account-type">
                 TFSA
