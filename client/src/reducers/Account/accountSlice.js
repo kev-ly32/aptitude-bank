@@ -23,6 +23,15 @@ export const addAccount = createAsyncThunk(
     return newAccount;
   }
 );
+export const deposit = createAsyncThunk("account/deposit", async (data) => {
+  const response = await fetch("/deposit", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: { "Content-type": "application/json" },
+  });
+  const newBalance = await response.json();
+  return newBalance;
+});
 
 const accountSlice = createSlice({
   name: "account",
@@ -40,6 +49,12 @@ const accountSlice = createSlice({
     },
     [fetchAccounts.fulfilled]: (state, action) => {
       state.accounts = state.accounts.concat(action.payload);
+    },
+    [deposit.fulfilled]: (state, action) => {
+      const updatedAccount = state.accounts.findIndex(
+        (account) => account._id === action.payload._id
+      );
+      state.accounts[updatedAccount] = action.payload;
     },
   },
 });

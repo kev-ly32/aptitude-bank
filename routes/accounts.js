@@ -21,4 +21,22 @@ router.post("/new-account", (req, res) => {
   });
 });
 
+router.put("/deposit", (req, res) => {
+  const { balance, id } = req.body;
+  console.log(balance, id);
+  Account.findOneAndUpdate(
+    { _id: id },
+    { $inc: { balance } },
+    { new: true },
+    (err, updatedBalance) => {
+      if (err) {
+        console.log(err);
+        res.json({ error: "Balance was not updated. Please try again." });
+      } else {
+        res.json(updatedBalance);
+      }
+    }
+  );
+});
+
 module.exports = router;

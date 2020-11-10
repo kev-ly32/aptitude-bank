@@ -40,7 +40,9 @@ function App() {
           <Route path="/dashboard" exact>
             {!user ? <Redirect to="/login" /> : <Dashboard />}
           </Route>
-          <Route path="/savings/deposit" exact component={Transaction} />
+          <Route path="/deposit" exact>
+            {!user ? <Redirect to="/login" /> : <Transaction />}
+          </Route>
         </Switch>
         <Footer />
       </Router>
