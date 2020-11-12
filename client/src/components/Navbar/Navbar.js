@@ -27,18 +27,18 @@ function Navbar() {
           {user ? (
             <li className="nav-link">
               <Link to="/dashboard">
-                <button>Dashboard</button>
+                <button className="nav-button">Dashboard</button>
               </Link>
             </li>
           ) : null}
           {!user ? (
             <ul className="nav-links">
-              <li className="nav-link">
+              <li className="auth-link">
                 <Link to="/login">
                   <button className="login-button">Login</button>
                 </Link>
               </li>
-              <li className="nav-link">
+              <li className="auth-link">
                 <Link to="/register">
                   <button className="register-button">Sign Up</button>
                 </Link>

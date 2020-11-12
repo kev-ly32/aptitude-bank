@@ -55,16 +55,18 @@ function Dashboard() {
       </section>
       <section className="dashboard-main">
         <section className="dashboard-cta">
+          <Link className="dashboard-button" to="/deposit">
+            Deposit Money
+          </Link>
           <button className="dashboard-button">Pay Bill</button>
           <button className="dashboard-button">Send e-Transfer</button>
-          <button className="dashboard-button">Investments</button>
           <button className="dashboard-button">
             Transfer money between accounts
           </button>
         </section>
         <section className="dashboard-content">
           <h1 className="accounts-header">EVERYDAY ACCOUNTS</h1>
-          <button name="savings" onClick={addNewAccount}>
+          <button className="addAccount" name="savings" onClick={addNewAccount}>
             + Add new account
           </button>
           {allAccounts[0]
@@ -87,11 +89,12 @@ function Dashboard() {
                   </div>
                 ))
             : null}
-          <Link to="/deposit">
-            <button>Deposit</button>
-          </Link>
           <h1 className="accounts-header">INVESTMENTS</h1>
-          <button name="investments" onClick={addNewAccount}>
+          <button
+            className="addAccount"
+            name="investments"
+            onClick={addNewAccount}
+          >
             + Add new investment
           </button>
           {allAccounts[0]

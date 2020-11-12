@@ -1,5 +1,5 @@
 .navbar {
-  background: #e8175d;
+  background: #72000a;
   border-bottom: 1px solid white;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .nav-brand {
-  flex: 1;
+  margin-right: 16%;
   text-decoration: none;
   color: white;
   font-size: 24px;
@@ -33,6 +33,25 @@ nav {
 
 .nav-link {
   list-style: none;
+}
+
+.nav-button {
+  list-style: none;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  outline: none;
+}
+
+.nav-button:focus,
+.nav-button:hover {
+  border-bottom: 1px solid white;
+}
+
+.auth-link {
+  list-style: none;
   margin-right: 10px;
 }
 
@@ -50,11 +69,11 @@ nav {
 
 .login-button:hover {
   background: white;
-  color: #e8175d;
+  color: #72000a;
 }
 
 .register-button {
-  color: #e8175d;
+  color: #72000a;
   background: white;
   border: none;
   width: 80px;
@@ -66,6 +85,6 @@ nav {
 }
 
 .register-button:hover {
-  background: #474747;
-  color: white;
+  background: #eeedff;
+  color: #72000a;
 }

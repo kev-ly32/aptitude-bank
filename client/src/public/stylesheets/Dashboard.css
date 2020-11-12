@@ -1,13 +1,20 @@
 .dashboard-intro {
   display: flex;
   height: 100px;
-  background: #e9f6ff;
+  background: rgb(253, 253, 253);
+  background: linear-gradient(
+    180deg,
+    rgba(253, 253, 253, 1) 0%,
+    rgba(253, 253, 253, 0.75) 25%,
+    rgba(253, 253, 253, 0.25) 75%,
+    rgba(253, 253, 253, 0) 100%
+  );
   align-items: center;
   justify-content: space-around;
 }
 
 .total-balance {
-  color: #e8175d;
+  color: #72000a;
 }
 
 .dashboard-main {
@@ -24,19 +31,39 @@
 .dashboard-button {
   height: 60px;
   width: 20%;
-  background: #e8175d;
+  background: #f7f5dd;
   border: none;
-  color: white;
+  color: black;
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0 1px 3px 1px rgb(182, 182, 182);
   font-size: 15px;
   padding: 0 4px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dashboard-button:hover {
   background: #474747;
+  color: white;
 }
+
+.addAccount {
+  width: 150px;
+  height: 30px;
+  cursor: pointer;
+  background: white;
+  border: 2px solid #72000a;
+  color: #72000a;
+  box-shadow: 0 0px 2px 1px rgb(182, 182, 182);
+  padding: 3px;
+}
+
+/* .addAccount:hover {
+  background: #474747;
+} */
 
 .dashboard-content {
   margin-top: 20px;
@@ -65,5 +92,5 @@
 }
 
 .account-balance {
-  color: #e8175d;
+  color: #72000a;
 }

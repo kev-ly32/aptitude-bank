@@ -81,8 +81,8 @@ label {
   width: 120px;
   height: 40px;
   background: white;
-  border: 2px solid #e8175d;
-  color: #e8175d;
+  border: 2px solid #72000a;
+  color: #72000a;
 }
 
 .auth-submit:focus {
@@ -91,7 +91,7 @@ label {
 
 .auth-submit:hover {
   color: white;
-  background: #e8175d;
+  background: #72000a;
   border: none;
 }
 
