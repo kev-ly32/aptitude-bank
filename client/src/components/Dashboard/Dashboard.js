@@ -15,7 +15,12 @@ function Dashboard() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const allAccounts = useSelector(selectAccount);
-
+  console.log(allAccounts);
+  const totalBalance = allAccounts.reduce(
+    (total, current) => total + current.balance,
+    0
+  );
+  console.log(totalBalance);
   const addNewAccount = async (e) => {
     e.preventDefault();
     let type = "";
@@ -50,17 +55,30 @@ function Dashboard() {
       <section className="dashboard-intro">
         <h1>Welcome back, {user.firstName}</h1>
         <h1>
-          Total balance: <span className="total-balance">$15,789.46</span>
+          Total balance:{" "}
+          <span className="total-balance">
+            {totalBalance.toLocaleString("en-EN", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
         </h1>
       </section>
       <section className="dashboard-main">
         <section className="dashboard-cta">
           <Link className="dashboard-button" to="/deposit">
-            Deposit Money
+            <i className="fas fa-coins"></i> Make a deposit
           </Link>
-          <button className="dashboard-button">Pay Bill</button>
-          <button className="dashboard-button">Send e-Transfer</button>
           <button className="dashboard-button">
+            <i className="fas fa-receipt"></i>Pay Bills
+          </button>
+          <button className="dashboard-button">
+            <i className="fas fa-location-arrow"></i>Send e-Transfer
+          </button>
+          <button className="dashboard-button">
+            <i className="fas fa-exchange-alt"></i>
             Transfer money between accounts
           </button>
         </section>

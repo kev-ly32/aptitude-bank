@@ -4,7 +4,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Auth.css";
 
 import { selectAccount, deposit } from "../../reducers/Account/accountSlice";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Deposit() {
   const [accountInfo, setAccountInfo] = useState({
@@ -15,6 +15,15 @@ function Deposit() {
   const history = useHistory();
   const dispatch = useDispatch();
   const allAccounts = useSelector(selectAccount);
+  const sortedAccounts = allAccounts.slice().sort((a, b) => {
+    if (a.type < b.type) {
+      return 1;
+    }
+    if (a.type > b.type) {
+      return -1;
+    }
+    return 0;
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,8 +54,13 @@ function Deposit() {
 
   return (
     <div className="auth-form">
-      <h2 className="form-header">Deposit</h2>
-      <h3 className="errorMessage">{err}</h3>
+      <Link className="backButton" to="/dashboard">
+        <i className="fas fa-long-arrow-alt-left"></i>
+      </Link>
+      <div className="form-header-info">
+        <h2 className="form-header">Deposit</h2>
+        <h3 className="errorMessage">{err}</h3>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">
@@ -77,7 +91,7 @@ function Deposit() {
               className={err && accountInfo.accountID === "" ? "error" : null}
             >
               <option value="">Select an account</option>
-              {allAccounts.map((account) => (
+              {sortedAccounts.map((account) => (
                 <option key={account._id} value={account._id}>
                   {account.type === "savings"
                     ? "EVERYDAY SAVINGS - "

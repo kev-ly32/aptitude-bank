@@ -1,5 +1,4 @@
 .auth-form {
-  display: flex;
   flex-direction: column;
   align-items: center;
   height: auto;
@@ -16,8 +15,23 @@ form {
   width: 100%;
 }
 
+.backButton {
+  color: black;
+  margin-left: 5px;
+  padding: 0 5px;
+  font-size: 33px;
+}
+
+.backButton:hover {
+  color: #a7ae9c;
+}
+
+.form-header-info {
+  text-align: center;
+}
+
 .form-header {
-  margin: 5% 0 1% 0;
+  margin-bottom: 1%;
   font-size: 26px;
 }
 
@@ -122,4 +136,8 @@ option {
 
 .error {
   border: 2px solid red;
+}
+
+#amount {
+  padding: 0 10px;
 }

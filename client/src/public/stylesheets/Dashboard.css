@@ -50,6 +50,10 @@
   color: white;
 }
 
+i {
+  margin-right: 10px;
+}
+
 .addAccount {
   width: 150px;
   height: 30px;
