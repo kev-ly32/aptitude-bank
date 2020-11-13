@@ -5,9 +5,9 @@
   background: linear-gradient(
     180deg,
     rgba(253, 253, 253, 1) 0%,
-    rgba(253, 253, 253, 0.75) 25%,
-    rgba(253, 253, 253, 0.25) 75%,
-    rgba(253, 253, 253, 0) 100%
+    rgba(253, 253, 253, 1) 25%,
+    rgba(253, 253, 253, 1) 75%,
+    rgb(238, 238, 238) 100%
   );
   align-items: center;
   justify-content: space-around;
@@ -55,15 +55,14 @@
   height: 30px;
   cursor: pointer;
   background: white;
-  border: 2px solid #72000a;
+  border: 1px solid #72000a;
   color: #72000a;
-  box-shadow: 0 0px 2px 1px rgb(182, 182, 182);
   padding: 3px;
 }
 
-/* .addAccount:hover {
-  background: #474747;
-} */
+.addAccount:hover {
+  box-shadow: 0 0px 3px 1px rgb(182, 182, 182);
+}
 
 .dashboard-content {
   margin-top: 20px;

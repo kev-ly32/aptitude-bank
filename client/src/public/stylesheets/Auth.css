@@ -106,3 +106,20 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+select {
+  font-size: 15px;
+  outline: none;
+}
+
+option {
+  font-weight: 400;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.error {
+  border: 2px solid red;
+}

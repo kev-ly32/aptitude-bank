@@ -19,6 +19,9 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (Object.values(userInfo).some((info) => info === "")) {
+      return setErr("Missing information");
+    }
     if (userInfo.password !== userInfo["confirmPassword"]) {
       return setErr("Passwords do not match.");
     }
@@ -42,16 +45,17 @@ function Register() {
   return (
     <div className="auth-form">
       <h2 className="form-header">Register</h2>
-      <h3>{err}</h3>
+      <h3 className="errorMessage">{err}</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-row form-row-multi">
           <div className="form-item-multi">
             <label htmlFor="firstName">First Name</label>
             <input
               autoFocus
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.firstName === "" ? "error" : null
+              }`}
               id="firstName"
-              required
               type="text"
               name="firstName"
               value={userInfo["firstName"]}
@@ -61,9 +65,10 @@ function Register() {
           <div className="form-item-multi">
             <label htmlFor="lastName">Last Name</label>
             <input
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.lastName === "" ? "error" : null
+              }`}
               id="lastName"
-              required
               type="text"
               name="lastName"
               value={userInfo["lastName"]}
@@ -75,9 +80,10 @@ function Register() {
           <div className="form-item-multi form-email">
             <label htmlFor="email">Email</label>
             <input
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.email === "" ? "error" : null
+              }`}
               id="email"
-              required
               type="email"
               name="email"
               value={userInfo["email"]}
@@ -87,9 +93,10 @@ function Register() {
           <div className="form-item-multi form-sin">
             <label htmlFor="sinNumber">SIN Number</label>
             <input
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.sinNumber === "" ? "error" : null
+              }`}
               id="sinNumber"
-              required
               type="number"
               name="sinNumber"
               value={userInfo["sinNumber"]}
@@ -101,9 +108,10 @@ function Register() {
           <div className="form-item">
             <label htmlFor="password">Password</label>
             <input
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.password === "" ? "error" : null
+              }`}
               id="password"
-              required
               type="password"
               name="password"
               value={userInfo["password"]}
@@ -115,9 +123,10 @@ function Register() {
           <div className="form-item">
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.confirmPassword === "" ? "error" : null
+              }`}
               id="confirmPassword"
-              required
               type="password"
               name="confirmPassword"
               value={userInfo["confirmPassword"]}

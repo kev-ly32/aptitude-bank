@@ -20,6 +20,9 @@ function Login() {
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (userInfo.username === "" || userInfo.password === "") {
+      return setErr("Missing information");
+    }
     try {
       const response = await dispatch(authenticate(userInfo));
       unwrapResult(response);
@@ -37,16 +40,17 @@ function Login() {
   return (
     <div className="auth-form">
       <h2 className="form-header">Log In</h2>
-      <h3>{err}</h3>
+      <h3 className="errorMessage">{err}</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">
             <label htmlFor="email">Email</label>
             <input
               autoFocus
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.username === "" ? "error" : null
+              }`}
               id="email"
-              required
               type="email"
               name="username"
               value={userInfo.username}
@@ -58,9 +62,10 @@ function Login() {
           <div className="form-item">
             <label htmlFor="password">Password</label>
             <input
-              className="form-input"
+              className={`form-input ${
+                err && userInfo.password === "" ? "error" : null
+              }`}
               id="password"
-              required
               type="password"
               name="password"
               value={userInfo.password}

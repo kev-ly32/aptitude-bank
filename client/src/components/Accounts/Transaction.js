@@ -26,8 +26,8 @@ function Deposit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!accountInfo.accountID) {
-      return setErr("Please select an account to deposit to.");
+    if (accountInfo.balance <= 0 || accountInfo.accountID === "") {
+      return setErr("Required information");
     }
     try {
       const response = await dispatch(
@@ -46,19 +46,21 @@ function Deposit() {
   return (
     <div className="auth-form">
       <h2 className="form-header">Deposit</h2>
-      <h3>{err}</h3>
+      <h3 className="errorMessage">{err}</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">
             <label htmlFor="amount">Amount</label>
             <input
               autoFocus
-              className="form-input"
+              className={`form-input ${
+                err && accountInfo.balance <= 0 ? "error" : null
+              }`}
               id="amount"
-              required
               type="number"
               name="balance"
-              step=".01"
+              min="0.01"
+              step="0.01"
               placeholder="$"
               value={accountInfo.balance}
               onChange={handleChange}
@@ -72,12 +74,15 @@ function Deposit() {
               name="accountID"
               value={accountInfo.name}
               onChange={handleChange}
+              className={err && accountInfo.accountID === "" ? "error" : null}
             >
-              <option>-- Select an account --</option>
+              <option value="">Select an account</option>
               {allAccounts.map((account) => (
                 <option key={account._id} value={account._id}>
-                  {account.type === "savings" ? "Everyday Savings " : "TFSA "}
-                  {account.id}
+                  {account.type === "savings"
+                    ? "EVERYDAY SAVINGS - "
+                    : "TFSA - "}
+                  {account.id.toString()} &nbsp;
                   {account.balance.toLocaleString("en-EN", {
                     style: "currency",
                     currency: "USD",
