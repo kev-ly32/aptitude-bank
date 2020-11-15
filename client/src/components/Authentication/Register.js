@@ -44,8 +44,10 @@ function Register() {
 
   return (
     <div className="auth-form">
-      <h2 className="form-header">Register</h2>
-      <h3 className="errorMessage">{err}</h3>
+      <div className="form-header-info">
+        <h2 className="form-header">Register</h2>
+        <h3 className="errorMessage">{err}</h3>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row form-row-multi">
           <div className="form-item-multi">

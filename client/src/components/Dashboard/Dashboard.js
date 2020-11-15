@@ -15,12 +15,11 @@ function Dashboard() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const allAccounts = useSelector(selectAccount);
-  console.log(allAccounts);
   const totalBalance = allAccounts.reduce(
     (total, current) => total + current.balance,
     0
   );
-  console.log(totalBalance);
+
   const addNewAccount = async (e) => {
     e.preventDefault();
     let type = "";
@@ -71,9 +70,9 @@ function Dashboard() {
           <Link className="dashboard-button" to="/deposit">
             <i className="fas fa-coins"></i> Make a deposit
           </Link>
-          <button className="dashboard-button">
+          <Link className="dashboard-button" to="/pay-bill">
             <i className="fas fa-receipt"></i>Pay Bills
-          </button>
+          </Link>
           <button className="dashboard-button">
             <i className="fas fa-location-arrow"></i>Send e-Transfer
           </button>

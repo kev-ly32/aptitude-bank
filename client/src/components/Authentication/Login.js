@@ -39,8 +39,10 @@ function Login() {
 
   return (
     <div className="auth-form">
-      <h2 className="form-header">Log In</h2>
-      <h3 className="errorMessage">{err}</h3>
+      <div className="form-header-info">
+        <h2 className="form-header">Log In</h2>
+        <h3 className="errorMessage">{err}</h3>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">

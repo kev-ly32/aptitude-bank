@@ -39,4 +39,28 @@ router.put("/deposit", (req, res) => {
   );
 });
 
+router.put("/pay-bill", (req, res) => {
+  const { balance, id } = req.body;
+  const neg = Math.abs(balance) * -1;
+  Account.findOneAndUpdate(
+    { _id: id },
+    {
+      $inc: { balance: neg },
+    },
+    { new: true },
+    (err, updatedBalance) => {
+      console.log(updatedBalance);
+      if (err) {
+        console.log(err);
+        return res.json({
+          err: true,
+          msg: `Payment must not exceed current balance.`,
+        });
+      } else {
+        res.json(updatedBalance);
+      }
+    }
+  );
+});
+
 module.exports = router;

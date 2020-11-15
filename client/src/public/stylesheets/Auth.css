@@ -28,6 +28,11 @@ form {
 
 .form-header-info {
   text-align: center;
+  padding-top: 5%;
+}
+
+.form-header-info-transaction {
+  text-align: center;
 }
 
 .form-header {

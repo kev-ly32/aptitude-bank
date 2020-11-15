@@ -42,7 +42,7 @@ function Deposit() {
       const response = await dispatch(
         deposit({
           id: accountInfo.accountID,
-          balance: Number(accountInfo.balance),
+          balance: accountInfo.balance,
         })
       );
       unwrapResult(response);
@@ -57,7 +57,7 @@ function Deposit() {
       <Link className="backButton" to="/dashboard">
         <i className="fas fa-long-arrow-alt-left"></i>
       </Link>
-      <div className="form-header-info">
+      <div className="form-header-info-transaction ">
         <h2 className="form-header">Deposit</h2>
         <h3 className="errorMessage">{err}</h3>
       </div>
