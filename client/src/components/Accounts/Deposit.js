@@ -64,25 +64,6 @@ function Deposit() {
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="amount">Amount</label>
-            <input
-              autoFocus
-              className={`form-input ${
-                err && accountInfo.balance <= 0 ? "error" : null
-              }`}
-              id="amount"
-              type="number"
-              name="balance"
-              min="0.01"
-              step="0.01"
-              placeholder="$"
-              value={accountInfo.balance}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-item">
             <label htmlFor="password">Account: </label>
             <select
               name="accountID"
@@ -106,6 +87,25 @@ function Deposit() {
                 </option>
               ))}
             </select>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-item">
+            <label htmlFor="amount">Amount</label>
+            <input
+              autoFocus
+              className={`form-input ${
+                err && accountInfo.balance <= 0 ? "error" : null
+              }`}
+              id="amount"
+              type="number"
+              name="balance"
+              min="0.01"
+              step="0.01"
+              placeholder="$"
+              value={accountInfo.balance}
+              onChange={handleChange}
+            />
           </div>
         </div>
         <button className="auth-submit" type="submit">

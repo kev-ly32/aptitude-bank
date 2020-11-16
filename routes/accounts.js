@@ -30,7 +30,6 @@ router.put("/deposit", (req, res) => {
     { new: true },
     (err, updatedBalance) => {
       if (err) {
-        console.log(err);
         res.json({ error: "Balance was not updated. Please try again." });
       } else {
         res.json(updatedBalance);
@@ -49,9 +48,7 @@ router.put("/pay-bill", (req, res) => {
     },
     { new: true },
     (err, updatedBalance) => {
-      console.log(updatedBalance);
       if (err) {
-        console.log(err);
         return res.json({
           err: true,
           msg: `Payment must not exceed current balance.`,

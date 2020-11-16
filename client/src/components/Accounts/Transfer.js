@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Auth.css";
 
-import { selectAccount, payBill } from "../../reducers/Account/accountSlice";
+import { selectAccount } from "../../reducers/Account/accountSlice";
 import { Link, useHistory } from "react-router-dom";
 
-function PayBill() {
+function Transfer() {
   const [accountInfo, setAccountInfo] = useState({
     balance: "",
-    accountID: "",
-    accountNumber: "",
+    accountNumber1: "",
+    accountNumber2: "",
   });
   const [err, setErr] = useState("");
   const history = useHistory();
@@ -34,43 +34,43 @@ function PayBill() {
     }));
   };
 
-  const checkBalance = async () => {
-    const [selectedAccount] = allAccounts.filter(
-      (account) => account._id === accountInfo.accountID
-    );
-    if (accountInfo.balance > selectedAccount.balance) {
-      return setErr(
-        `Cannot exceed more than the current balance of  $${selectedAccount.balance.toFixed(
-          2
-        )}`
-      );
-    }
-    try {
-      const response = await dispatch(
-        payBill({
-          id: accountInfo.accountID,
-          balance: accountInfo.balance,
-        })
-      );
-      unwrapResult(response);
-      history.push("/dashboard");
-    } catch (error) {
-      setErr(error.message);
-    }
-  };
+  //   const checkBalance = async () => {
+  //     const [selectedAccount] = allAccounts.filter(
+  //       (account) => account._id === accountInfo.accountID
+  //     );
+  //     if (accountInfo.balance > selectedAccount.balance) {
+  //       return setErr(
+  //         `Cannot exceed more than the current balance of  $${selectedAccount.balance.toFixed(
+  //           2
+  //         )}`
+  //       );
+  //     }
+  //     try {
+  //       const response = await dispatch(
+  //         payBill({
+  //           id: accountInfo.accountID,
+  //           balance: accountInfo.balance,
+  //         })
+  //       );
+  //       unwrapResult(response);
+  //       history.push("/dashboard");
+  //     } catch (error) {
+  //       setErr(error.message);
+  //     }
+  //   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  //   const handleSubmit = (e) => {
+  //     e.preventDefault();
 
-    if (
-      accountInfo.balance <= 0 ||
-      accountInfo.accountID === "" ||
-      accountInfo.accountNumber === ""
-    ) {
-      return setErr("Required information");
-    }
-    checkBalance();
-  };
+  //     if (
+  //       accountInfo.balance <= 0 ||
+  //       accountInfo.accountNumber1 === "" ||
+  //       accountInfo.accountNumber2 === ""
+  //     ) {
+  //       return setErr("Required information");
+  //     }
+  //     checkBalance();
+  //   };
 
   return (
     <div className="auth-form">
@@ -78,15 +78,15 @@ function PayBill() {
         <i className="fas fa-long-arrow-alt-left"></i>
       </Link>
       <div className="form-header-info-transaction ">
-        <h2 className="form-header">Pay Bill</h2>
+        <h2 className="form-header">Make a transfer</h2>
         <h3 className="errorMessage">{err}</h3>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="form-row">
           <div className="form-item">
             <label htmlFor="password">From: </label>
             <select
-              name="accountID"
+              name="accountNumber1"
               value={accountInfo.name}
               onChange={handleChange}
               className={err && accountInfo.accountID === "" ? "error" : null}
@@ -111,18 +111,29 @@ function PayBill() {
         </div>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="accountNumber">Account Number</label>
-            <input
-              className={`form-input ${
-                err && accountInfo.accountNumber === "" ? "error" : null
-              }`}
-              id="accountNumber"
-              type="text"
-              name="accountNumber"
-              placeholder="Account number on bill"
-              value={accountInfo.accountNumber}
+            <label htmlFor="password">To: </label>
+            <select
+              name="accountNumber2"
+              value={accountInfo.name}
               onChange={handleChange}
-            />
+              className={err && accountInfo.accountID === "" ? "error" : null}
+            >
+              <option value="">Select an account</option>
+              {sortedAccounts.map((account) => (
+                <option key={account._id} value={account._id}>
+                  {account.type === "savings"
+                    ? "EVERYDAY SAVINGS - "
+                    : "TFSA - "}
+                  {account.id.toString()} &nbsp;
+                  {account.balance.toLocaleString("en-EN", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div className="form-row">
@@ -151,4 +162,4 @@ function PayBill() {
   );
 }
 
-export default PayBill;
+export default Transfer;

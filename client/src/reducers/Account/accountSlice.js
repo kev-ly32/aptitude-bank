@@ -30,7 +30,6 @@ export const deposit = createAsyncThunk("account/deposit", async (data) => {
     headers: { "Content-type": "application/json" },
   });
   const newBalance = await response.json();
-  console.log(newBalance);
   return newBalance;
 });
 

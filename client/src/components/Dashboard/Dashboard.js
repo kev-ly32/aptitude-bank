@@ -47,7 +47,7 @@ function Dashboard() {
     if (!allAccounts[0]) {
       dispatch(fetchAccounts({ userID: user.sinNumber }));
     }
-  }, [allAccounts, dispatch, user.sinNumber]);
+  }, []);
 
   return (
     <div>
@@ -76,10 +76,10 @@ function Dashboard() {
           <button className="dashboard-button">
             <i className="fas fa-location-arrow"></i>Send e-Transfer
           </button>
-          <button className="dashboard-button">
+          <Link to="/transfer" className="dashboard-button">
             <i className="fas fa-exchange-alt"></i>
             Transfer money between accounts
-          </button>
+          </Link>
         </section>
         <section className="dashboard-content">
           <h1 className="accounts-header">EVERYDAY ACCOUNTS</h1>
