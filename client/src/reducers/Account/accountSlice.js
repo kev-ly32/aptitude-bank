@@ -46,6 +46,19 @@ export const payBill = createAsyncThunk("account/payBill", async (data) => {
   return newBalance;
 });
 
+export const transfer = createAsyncThunk("account/transfer", async (data) => {
+  const response = await fetch("/transfer", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: { "Content-type": "application/json" },
+  });
+  // const newBalance = await response.json();
+  // if (newBalance.err) {
+  //   throw Error(newBalance.msg);
+  // }
+  // return newBalance;
+});
+
 const accountSlice = createSlice({
   name: "account",
   initialState: {

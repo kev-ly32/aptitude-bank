@@ -84,8 +84,9 @@ function PayBill() {
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="password">From: </label>
+            <label htmlFor="account">From: </label>
             <select
+              id="account"
               name="accountID"
               value={accountInfo.name}
               onChange={handleChange}

@@ -64,8 +64,9 @@ function Deposit() {
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="password">Account: </label>
+            <label htmlFor="account">Account: </label>
             <select
+              id="account"
               name="accountID"
               value={accountInfo.name}
               onChange={handleChange}

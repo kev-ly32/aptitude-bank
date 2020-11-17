@@ -60,4 +60,8 @@ router.put("/pay-bill", (req, res) => {
   );
 });
 
+router.put("/transfer", (req, res) => {
+  console.log(req.body);
+});
+
 module.exports = router;
