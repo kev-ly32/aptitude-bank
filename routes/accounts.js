@@ -40,7 +40,7 @@ router.put("/deposit", (req, res) => {
 
 router.put("/pay-bill", (req, res) => {
   const { balance, id } = req.body;
-  const neg = Math.abs(balance) * -1;
+  const neg = -Math.abs(balance) * -1;
   Account.findOneAndUpdate(
     { _id: id },
     {
@@ -61,7 +61,37 @@ router.put("/pay-bill", (req, res) => {
 });
 
 router.put("/transfer", (req, res) => {
-  console.log(req.body);
+  const { amount, account1, account2 } = req.body;
+  const neg = -Math.abs(amount);
+  Account.findOneAndUpdate(
+    { _id: account1 },
+    {
+      $inc: { balance: neg },
+    },
+    { new: true },
+    (err, updatedAccount1) => {
+      if (err) {
+        return res.json({ err: true, msg: "Error transferring money." });
+      } else {
+        Account.findOneAndUpdate(
+          {
+            _id: account2,
+          },
+          {
+            $inc: { balance: amount },
+          },
+          { new: true },
+          (err, updatedAccount2) => {
+            if (err) {
+              return res.json({ err: true, msg: "Error transferring money." });
+            } else {
+              res.json([updatedAccount1, updatedAccount2]);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 
 module.exports = router;

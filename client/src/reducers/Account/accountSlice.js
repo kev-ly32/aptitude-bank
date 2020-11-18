@@ -52,11 +52,11 @@ export const transfer = createAsyncThunk("account/transfer", async (data) => {
     body: JSON.stringify(data),
     headers: { "Content-type": "application/json" },
   });
-  // const newBalance = await response.json();
-  // if (newBalance.err) {
-  //   throw Error(newBalance.msg);
-  // }
-  // return newBalance;
+  const newBalances = await response.json();
+  if (newBalances.err) {
+    throw Error(newBalances.msg);
+  }
+  return newBalances;
 });
 
 const accountSlice = createSlice({
@@ -90,6 +90,17 @@ const accountSlice = createSlice({
       state.accounts[updatedAccount] = action.payload;
     },
     [payBill.rejected]: (state, action) => {
+      state.error = action.error;
+    },
+    [transfer.fulfilled]: (state, action) => {
+      state.accounts = state.accounts.map(
+        (oldAccount) =>
+          action.payload.find(
+            (newAccount) => newAccount._id === oldAccount._id
+          ) || oldAccount
+      );
+    },
+    [transfer.rejected]: (state, action) => {
       state.error = action.error;
     },
   },

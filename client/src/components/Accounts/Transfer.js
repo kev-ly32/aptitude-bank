@@ -53,9 +53,8 @@ function Transfer() {
           amount,
         })
       );
-
-      // unwrapResult(response);
-      // history.push("/dashboard");
+      unwrapResult(response);
+      history.push("/dashboard");
     } catch (error) {
       setErr(error.message);
     }
