@@ -42,7 +42,7 @@ function Deposit() {
       const response = await dispatch(
         deposit({
           id: accountInfo.accountID,
-          balance: accountInfo.balance,
+          balance: accountInfo.balance * 100,
         })
       );
       unwrapResult(response);
@@ -79,7 +79,7 @@ function Deposit() {
                     ? "EVERYDAY SAVINGS - "
                     : "TFSA - "}
                   {account.id.toString()} &nbsp;
-                  {account.balance.toLocaleString("en-EN", {
+                  {(account.balance / 100).toLocaleString("en-EN", {
                     style: "currency",
                     currency: "USD",
                     minimumFractionDigits: 2,

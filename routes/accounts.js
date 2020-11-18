@@ -40,7 +40,7 @@ router.put("/deposit", (req, res) => {
 
 router.put("/pay-bill", (req, res) => {
   const { balance, id } = req.body;
-  const neg = -Math.abs(balance) * -1;
+  const neg = -Math.abs(balance);
   Account.findOneAndUpdate(
     { _id: id },
     {

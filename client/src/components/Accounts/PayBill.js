@@ -38,18 +38,18 @@ function PayBill() {
     const [selectedAccount] = allAccounts.filter(
       (account) => account._id === accountInfo.accountID
     );
-    if (accountInfo.balance > selectedAccount.balance) {
+    if (accountInfo.balance > selectedAccount.balance / 100) {
       return setErr(
-        `Cannot exceed more than the current balance of  $${selectedAccount.balance.toFixed(
-          2
-        )}`
+        `Cannot exceed more than the current balance of  $${(
+          selectedAccount.balance / 100
+        ).toFixed(2)}`
       );
     }
     try {
       const response = await dispatch(
         payBill({
           id: accountInfo.accountID,
-          balance: accountInfo.balance,
+          balance: accountInfo.balance * 100,
         })
       );
       unwrapResult(response);
@@ -99,7 +99,7 @@ function PayBill() {
                     ? "EVERYDAY SAVINGS - "
                     : "TFSA - "}
                   {account.id.toString()} &nbsp;
-                  {account.balance.toLocaleString("en-EN", {
+                  {(account.balance / 100).toLocaleString("en-EN", {
                     style: "currency",
                     currency: "USD",
                     minimumFractionDigits: 2,

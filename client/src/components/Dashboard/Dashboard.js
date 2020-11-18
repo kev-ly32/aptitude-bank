@@ -16,7 +16,7 @@ function Dashboard() {
   const user = useSelector(selectUser);
   const allAccounts = useSelector(selectAccount);
   const totalBalance = allAccounts.reduce(
-    (total, current) => total + current.balance,
+    (total, current) => total + current.balance / 100,
     0
   );
 
@@ -96,7 +96,7 @@ function Dashboard() {
                       <span className="account-number">{account.id}</span>
                     </h3>
                     <h4 className="account-balance">
-                      {account.balance.toLocaleString("en-EN", {
+                      {(account.balance / 100).toLocaleString("en-EN", {
                         style: "currency",
                         currency: "USD",
                         minimumFractionDigits: 2,
@@ -124,7 +124,7 @@ function Dashboard() {
                       <span className="account-number">{account.id}</span>
                     </h3>
                     <h4 className="account-balance">
-                      {account.balance.toLocaleString("en-EN", {
+                      {(account.balance / 100).toLocaleString("en-EN", {
                         style: "currency",
                         currency: "USD",
                         minimumFractionDigits: 2,

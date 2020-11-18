@@ -38,11 +38,11 @@ function Transfer() {
     const [selectedAccount] = allAccounts.filter(
       (account) => account._id === accountInfo.account1
     );
-    if (accountInfo.amount > selectedAccount.balance) {
+    if (accountInfo.amount * 100 > selectedAccount.balance) {
       return setErr(
-        `Cannot exceed more than the current balance of  $${selectedAccount.balance.toFixed(
-          2
-        )}`
+        `Cannot exceed more than the current balance of  $${(
+          selectedAccount.balance / 100
+        ).toFixed(2)}`
       );
     }
     try {
@@ -50,7 +50,7 @@ function Transfer() {
         transfer({
           account1,
           account2,
-          amount,
+          amount: amount * 100,
         })
       );
       unwrapResult(response);
@@ -104,7 +104,7 @@ function Transfer() {
                     ? "EVERYDAY SAVINGS - "
                     : "TFSA - "}
                   {account.id.toString()} &nbsp;
-                  {account.balance.toLocaleString("en-EN", {
+                  {(account.balance / 100).toLocaleString("en-EN", {
                     style: "currency",
                     currency: "USD",
                     minimumFractionDigits: 2,
@@ -134,7 +134,7 @@ function Transfer() {
                       ? "EVERYDAY SAVINGS - "
                       : "TFSA - "}
                     {account.id.toString()} &nbsp;
-                    {account.balance.toLocaleString("en-EN", {
+                    {(account.balance / 100).toLocaleString("en-EN", {
                       style: "currency",
                       currency: "USD",
                       minimumFractionDigits: 2,
