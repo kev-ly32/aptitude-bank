@@ -9,8 +9,8 @@ import { Link, useHistory } from "react-router-dom";
 function Transfer() {
   const [accountInfo, setAccountInfo] = useState({
     amount: "",
-    account1: "",
-    account2: "",
+    account: "",
+    email: "",
   });
   const [err, setErr] = useState("");
   const history = useHistory();
@@ -34,9 +34,9 @@ function Transfer() {
     }));
   };
 
-  const checkBalance = async (amount, account1, account2) => {
+  const checkBalance = async (amount, account, email) => {
     const [selectedAccount] = allAccounts.filter(
-      (account) => account._id === accountInfo.account1
+      (account) => account._id === accountInfo.account
     );
     if (accountInfo.amount * 100 > selectedAccount.balance) {
       return setErr(
@@ -48,8 +48,8 @@ function Transfer() {
     try {
       const response = await dispatch(
         transfer({
-          account1,
-          account2,
+          account,
+          email,
           amount: amount * 100,
         })
       );
@@ -61,20 +61,13 @@ function Transfer() {
   };
 
   const handleSubmit = (e) => {
-    const { amount, account1, account2 } = accountInfo;
+    const { amount, account, email } = accountInfo;
     e.preventDefault();
 
-    if (amount <= 0 || account1 === "" || account2 === "") {
+    if (amount <= 0 || account === "" || email === "") {
       return setErr("Required information");
     }
-    if (account1 === account2) {
-      setAccountInfo((prev) => ({
-        ...prev,
-        account2: "",
-      }));
-      return setErr("Required information");
-    }
-    checkBalance(amount, account1, account2);
+    checkBalance(amount, account, email);
   };
 
   return (
@@ -83,19 +76,19 @@ function Transfer() {
         <i className="fas fa-long-arrow-alt-left"></i>
       </Link>
       <div className="form-header-info-transaction ">
-        <h2 className="form-header">Move money</h2>
+        <h2 className="form-header">Send e-Transfer</h2>
         <h3 className="errorMessage">{err}</h3>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="account1">From: </label>
+            <label htmlFor="account">From: </label>
             <select
-              id="account1"
-              name="account1"
-              value={accountInfo.account1}
+              id="account"
+              name="account"
+              value={accountInfo.account}
               onChange={handleChange}
-              className={err && accountInfo.account1 === "" ? "error" : null}
+              className={err && accountInfo.account === "" ? "error" : null}
             >
               <option value="">Select an account</option>
               {sortedAccounts.map((account) => (
@@ -117,32 +110,20 @@ function Transfer() {
         </div>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="account2">To: </label>
-            <select
-              id="account2"
-              name="account2"
-              value={accountInfo.account2}
+            <label htmlFor="email">Email</label>
+            <input
+              className={`form-input ${
+                err && accountInfo.email === "" ? "error" : null
+              }`}
+              id="email"
+              type="number"
+              name="email"
+              min="0.01"
+              step="0.01"
+              placeholder="$"
+              value={accountInfo.email}
               onChange={handleChange}
-              className={err && accountInfo.account2 === "" ? "error" : null}
-            >
-              <option value="">Select an account</option>
-              {sortedAccounts
-                .filter((account) => account._id !== accountInfo.account1)
-                .map((account) => (
-                  <option key={account._id} value={account._id}>
-                    {account.type === "savings"
-                      ? "EVERYDAY SAVINGS - "
-                      : "TFSA - "}
-                    {account.id.toString()} &nbsp;
-                    {(account.balance / 100).toLocaleString("en-EN", {
-                      style: "currency",
-                      currency: "USD",
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </option>
-                ))}
-            </select>
+            />
           </div>
         </div>
         <div className="form-row">
@@ -164,7 +145,7 @@ function Transfer() {
           </div>
         </div>
         <button className="auth-submit" type="submit">
-          Submit
+          Send
         </button>
       </form>
     </div>

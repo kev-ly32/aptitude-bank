@@ -73,9 +73,9 @@ function Dashboard() {
           <Link className="dashboard-button" to="/pay-bill">
             <i className="fas fa-receipt"></i>Pay Bills
           </Link>
-          <button className="dashboard-button">
+          <Link to="/etransfer" className="dashboard-button">
             <i className="fas fa-location-arrow"></i>Send e-Transfer
-          </button>
+          </Link>
           <Link to="/transfer" className="dashboard-button">
             <i className="fas fa-exchange-alt"></i>
             Transfer money between accounts
