@@ -95,6 +95,7 @@ function Dashboard() {
                       Everyday Savings
                       <span className="account-number">{account.id}</span>
                     </h3>
+                    <h5>{account.default ? "Primary" : null}</h5>
                     <h4 className="account-balance">
                       {(account.balance / 100).toLocaleString("en-EN", {
                         style: "currency",
@@ -123,6 +124,7 @@ function Dashboard() {
                       TFSA
                       <span className="account-number">{account.id}</span>
                     </h3>
+                    <h5>{account.default ? "Primary" : null}</h5>
                     <h4 className="account-balance">
                       {(account.balance / 100).toLocaleString("en-EN", {
                         style: "currency",

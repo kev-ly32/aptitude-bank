@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Deposit from "./components/Accounts/Deposit";
 import PayBill from "./components/Accounts/PayBill";
 import Transfer from "./components/Accounts/Transfer";
+import Default from "./components/Accounts/Default";
 import {
   BrowserRouter as Router,
   Switch,
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route path="/transfer" exact>
             {!user ? <Redirect to="/login" /> : <Transfer />}
+          </Route>
+          <Route path="/settings" exact>
+            {!user ? <Redirect to="/login" /> : <Default />}
           </Route>
         </Switch>
         <Footer />

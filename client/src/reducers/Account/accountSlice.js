@@ -10,6 +10,18 @@ export const fetchAccounts = createAsyncThunk(
     return allAccounts;
   }
 );
+export const setDefault = createAsyncThunk(
+  "account/setDefault",
+  async (account) => {
+    const response = await fetch("/default", {
+      method: "PUT",
+      body: JSON.stringify({ account }),
+      headers: { "Content-type": "application/json" },
+    });
+    const statusUpdates = await response.json();
+    return statusUpdates;
+  }
+);
 
 export const addAccount = createAsyncThunk(
   "account/addAccount",
@@ -101,6 +113,17 @@ const accountSlice = createSlice({
       );
     },
     [transfer.rejected]: (state, action) => {
+      state.error = action.error;
+    },
+    [setDefault.fulfilled]: (state, action) => {
+      state.accounts = state.accounts.map(
+        (oldAccount) =>
+          action.payload.find(
+            (newAccount) => newAccount._id === oldAccount._id
+          ) || oldAccount
+      );
+    },
+    [setDefault.rejected]: (state, action) => {
       state.error = action.error;
     },
   },

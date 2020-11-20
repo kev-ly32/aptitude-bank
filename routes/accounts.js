@@ -94,4 +94,36 @@ router.put("/transfer", (req, res) => {
   );
 });
 
+router.put("/default", (req, res) => {
+  Account.findOneAndUpdate(
+    { default: true },
+    { default: false },
+    { new: true },
+    (err, updatedAccount2) => {
+      if (err) {
+        return res.json({
+          err: true,
+          msg: "Error setting default account",
+        });
+      } else {
+        Account.findOneAndUpdate(
+          { _id: req.body.account },
+          { default: true },
+          { new: true },
+          (err, updatedAccount1) => {
+            if (err) {
+              return res.json({
+                err: true,
+                msg: "Error setting default account",
+              });
+            } else {
+              res.json([updatedAccount1, updatedAccount2]);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 module.exports = router;
