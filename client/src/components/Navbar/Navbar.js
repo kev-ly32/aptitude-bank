@@ -51,6 +51,18 @@ function Navbar() {
                   Logout
                 </button>
               </li>
+              <li className="nav-link settings">
+                <div className="settings">
+                  <i className="fas fa-cog"></i>
+                </div>
+                <div className="dropdownContent">
+                  <Link className="settingsOption" to="/settings">
+                    <button className="settingsOption">
+                      Change default account
+                    </button>
+                  </Link>
+                </div>
+              </li>
             </ul>
           )}
         </nav>

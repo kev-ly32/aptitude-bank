@@ -14,6 +14,9 @@ const AccountSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  default: {
+    type: Boolean,
+  },
 });
 
 module.exports = mongoose.model("Account", AccountSchema);
