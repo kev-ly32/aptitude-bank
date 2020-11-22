@@ -10,8 +10,8 @@ const express = require("express"),
   port = process.env.PORT || 5000;
 
 const User = require("./models/User"),
-  authRoutes = require("./routes/auth");
-accountRoutes = require("./routes/accounts");
+  authRoutes = require("./routes/auth"),
+  accountRoutes = require("./routes/accounts");
 
 //load config
 dotenv.config({ path: "./config/config.env" });
