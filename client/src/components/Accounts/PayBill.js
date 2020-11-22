@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import "../../public/stylesheets/Auth.css";
+import "../../public/stylesheets/Forms.css";
 
 import { selectAccount, payBill } from "../../reducers/Account/accountSlice";
 import { Link, useHistory } from "react-router-dom";

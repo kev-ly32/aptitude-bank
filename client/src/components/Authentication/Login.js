@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import "../../public/stylesheets/Auth.css";
+import "../../public/stylesheets/Forms.css";
 
 import { authenticate } from "../../reducers/Authentication/userSlice";
 

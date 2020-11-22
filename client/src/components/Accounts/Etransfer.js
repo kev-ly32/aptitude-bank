@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import "../../public/stylesheets/Auth.css";
+import "../../public/stylesheets/Forms.css";
 
 import { selectAccount, transfer } from "../../reducers/Account/accountSlice";
 import { Link, useHistory } from "react-router-dom";
@@ -112,15 +112,13 @@ function Transfer() {
           <div className="form-item">
             <label htmlFor="email">Email</label>
             <input
+              autoFocus
               className={`form-input ${
                 err && accountInfo.email === "" ? "error" : null
               }`}
               id="email"
-              type="number"
+              type="email"
               name="email"
-              min="0.01"
-              step="0.01"
-              placeholder="$"
               value={accountInfo.email}
               onChange={handleChange}
             />
