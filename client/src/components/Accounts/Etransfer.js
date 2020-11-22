@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Forms.css";
 
-import { selectAccount, transfer } from "../../reducers/Account/accountSlice";
+import { selectAccount, etransfer } from "../../reducers/Account/accountSlice";
 import { Link, useHistory } from "react-router-dom";
 
 function Transfer() {
@@ -47,7 +47,7 @@ function Transfer() {
     }
     try {
       const response = await dispatch(
-        transfer({
+        etransfer({
           account,
           email,
           amount: amount * 100,

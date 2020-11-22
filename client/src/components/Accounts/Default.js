@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../public/stylesheets/Forms.css";
 
 import { selectAccount, setDefault } from "../../reducers/Account/accountSlice";
+import { selectUser } from "../../reducers/Authentication/userSlice";
 import { Link, useHistory } from "react-router-dom";
 
 function Default() {
@@ -10,6 +11,7 @@ function Default() {
   const [err, setErr] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const allAccounts = useSelector(selectAccount);
   const sortedAccounts = allAccounts.slice().sort((a, b) => {
     if (a.type < b.type) {
@@ -27,7 +29,7 @@ function Default() {
       return setErr("Required information");
     }
     try {
-      await dispatch(setDefault(account));
+      await dispatch(setDefault({ account, sinNumber: user.sinNumber }));
       history.push("/dashboard");
     } catch (error) {
       console.log(error);

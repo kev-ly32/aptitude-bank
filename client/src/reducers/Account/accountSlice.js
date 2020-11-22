@@ -15,7 +15,7 @@ export const setDefault = createAsyncThunk(
   async (account) => {
     const response = await fetch("/default", {
       method: "PUT",
-      body: JSON.stringify({ account }),
+      body: JSON.stringify(account),
       headers: { "Content-type": "application/json" },
     });
     const statusUpdates = await response.json();
@@ -71,6 +71,19 @@ export const transfer = createAsyncThunk("account/transfer", async (data) => {
   return newBalances;
 });
 
+export const etransfer = createAsyncThunk("account/etransfer", async (data) => {
+  const response = await fetch("/etransfer", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: { "Content-type": "application/json" },
+  });
+  const newBalance = await response.json();
+  if (newBalance.err) {
+    throw Error(newBalance.msg);
+  }
+  return newBalance;
+});
+
 const accountSlice = createSlice({
   name: "account",
   initialState: {
@@ -124,6 +137,15 @@ const accountSlice = createSlice({
       );
     },
     [setDefault.rejected]: (state, action) => {
+      state.error = action.error;
+    },
+    [etransfer.fulfilled]: (state, action) => {
+      const updatedAccount = state.accounts.findIndex(
+        (account) => account._id === action.payload._id
+      );
+      state.accounts[updatedAccount] = action.payload;
+    },
+    [etransfer.rejected]: (state, action) => {
       state.error = action.error;
     },
   },
