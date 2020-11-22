@@ -23,6 +23,9 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//serve production build of app
+app.use(express.static(path.join(__dirname, "client", "build")));
+
 //Configure express-session
 app.use(
   session({
@@ -44,5 +47,9 @@ passport.deserializeUser(User.deserializeUser());
 //import routes
 app.use(authRoutes);
 app.use(accountRoutes);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
