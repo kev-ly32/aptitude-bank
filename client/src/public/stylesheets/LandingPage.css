@@ -39,6 +39,10 @@
   color: #72000a;
 }
 
+.intro-button:focus {
+  outline: none;
+}
+
 .intro-image {
   height: 475px;
   border-top-left-radius: 250px;

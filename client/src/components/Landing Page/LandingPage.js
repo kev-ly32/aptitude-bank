@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../public/stylesheets/LandingPage.css";
 
 const LandingProducts = ({ title, content }) => {
@@ -7,9 +8,9 @@ const LandingProducts = ({ title, content }) => {
       <h2>{title}</h2>
       <h4>{content}</h4>
       <div className="product-link-container">
-        <a href="/" className="product-link">
-          Learn More
-        </a>
+        <Link className="product-link" to="/">
+          <span className="product-link"> Learn More </span>
+        </Link>
       </div>
     </div>
   );
@@ -27,7 +28,9 @@ function LandingPage() {
               Plus, open both a chequing and savings account and receive a $300
               deposit*.
             </h3>
-            <button className="intro-button">Learn More</button>
+            <Link to="/">
+              <button className="intro-button">Learn More</button>
+            </Link>
           </div>
           <img
             className="intro-image"
@@ -53,10 +56,6 @@ function LandingPage() {
           title="Credit Cards"
           content="Access exclusive perks when purchasing on credit"
         />
-        {/* <div className="productInfo">Savings Account</div>
-        <div className="productInfo">Chequing Account</div>
-        <div className="productInfo">Investments</div>
-        <div className="productInfo">Credit Cards</div> */}
       </section>
     </div>
   );

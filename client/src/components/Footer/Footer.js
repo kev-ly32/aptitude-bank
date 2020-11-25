@@ -26,11 +26,7 @@ function Footer() {
       <section className="footer-section">
         <ul className="footer-nav">
           {footerNav.map((page) => (
-            <Link
-              className="footer-item"
-              key={page}
-              to={`/${page.toLowerCase()}`}
-            >
+            <Link className="footer-item" key={page} to="/">
               <li>{page}</li>
             </Link>
           ))}
