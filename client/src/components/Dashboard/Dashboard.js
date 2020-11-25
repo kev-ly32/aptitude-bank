@@ -90,7 +90,11 @@ function Dashboard() {
             ? allAccounts
                 .filter((account) => account.type === "savings")
                 .map((account) => (
-                  <div key={account._id} className="account">
+                  <Link
+                    key={account._id}
+                    to={`/account/${account.id}`}
+                    className="account"
+                  >
                     <h3 className="account-type">
                       Everyday Savings
                       <span className="account-number">{account.id}</span>
@@ -104,7 +108,7 @@ function Dashboard() {
                         maximumFractionDigits: 2,
                       })}
                     </h4>
-                  </div>
+                  </Link>
                 ))
             : null}
           <h1 className="accounts-header">INVESTMENTS</h1>
@@ -119,7 +123,11 @@ function Dashboard() {
             ? allAccounts
                 .filter((account) => account.type === "investment")
                 .map((account) => (
-                  <div key={account._id} className="account">
+                  <Link
+                    key={account._id}
+                    to={`/account/${account.id}`}
+                    className="account"
+                  >
                     <h3 className="account-type">
                       TFSA
                       <span className="account-number">{account.id}</span>
@@ -133,7 +141,7 @@ function Dashboard() {
                         maximumFractionDigits: 2,
                       })}
                     </h4>
-                  </div>
+                  </Link>
                 ))
             : null}
         </section>

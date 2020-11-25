@@ -6,6 +6,7 @@ import Register from "./components/Authentication/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Dashboard from "./components/Dashboard/Dashboard";
+import AccountDetails from "./components/Accounts/AccountDetails";
 import Deposit from "./components/Accounts/Deposit";
 import PayBill from "./components/Accounts/PayBill";
 import Transfer from "./components/Accounts/Transfer";
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route path="/dashboard" exact>
             {!user ? <Redirect to="/login" /> : <Dashboard />}
+          </Route>
+          <Route path="/account/:id" exact>
+            {!user ? <Redirect to="/login" /> : <AccountDetails />}
           </Route>
           <Route path="/deposit" exact>
             {!user ? <Redirect to="/login" /> : <Deposit />}
