@@ -14,6 +14,13 @@ const AccountSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  transactions: [
+    {
+      amount: Number,
+      transaction: String,
+      date: Date,
+    },
+  ],
   default: {
     type: Boolean,
   },

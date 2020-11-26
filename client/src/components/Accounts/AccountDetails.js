@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import "../../public/stylesheets/Dashboard.css";
@@ -12,20 +12,24 @@ import {
 import { selectUser } from "../../reducers/Authentication/userSlice";
 
 function AccountDetails() {
+  let { id } = useParams();
   const user = useSelector(selectUser);
   const allAccounts = useSelector(selectAccount);
-  const totalBalance = allAccounts.reduce(
-    (total, current) => total + current.balance / 100,
-    0
-  );
+
+  const [currentAcc] = allAccounts.filter((account) => account.id === id);
+
   return (
     <div>
       <section className="dashboard-intro">
-        <h1>Welcome back, {user.firstName}</h1>
         <h1>
-          Total balance:{" "}
+          {currentAcc.type === "savings"
+            ? `Everyday Savings ${currentAcc.id}`
+            : `TFSA ${currentAcc.id}`}
+        </h1>
+        <h1>
+          Account balance:{" "}
           <span className="total-balance">
-            {totalBalance.toLocaleString("en-EN", {
+            {(currentAcc.balance / 100).toLocaleString("en-EN", {
               style: "currency",
               currency: "USD",
               minimumFractionDigits: 2,
@@ -33,6 +37,9 @@ function AccountDetails() {
             })}
           </span>
         </h1>
+      </section>
+      <section className="dashboard-main">
+        <h1>Transactions</h1>
       </section>
     </div>
   );

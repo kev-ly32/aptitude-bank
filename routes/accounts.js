@@ -24,10 +24,13 @@ router.post("/new-account", (req, res) => {
 
 router.put("/deposit", (req, res) => {
   const { balance, id } = req.body;
-  console.log(balance, id);
+  const transaction = { amount: balance, transaction: "Deposit", date: Date() };
   Account.findOneAndUpdate(
     { _id: id },
-    { $inc: { balance } },
+    {
+      $inc: { balance },
+      $push: { transactions: transaction },
+    },
     { new: true },
     (err, updatedBalance) => {
       if (err) {
@@ -42,10 +45,16 @@ router.put("/deposit", (req, res) => {
 router.put("/pay-bill", (req, res) => {
   const { balance, id } = req.body;
   const neg = -Math.abs(balance);
+  const transaction = {
+    amount: neg,
+    transaction: "Bill Payment",
+    date: Date(),
+  };
   Account.findOneAndUpdate(
     { _id: id },
     {
       $inc: { balance: neg },
+      $push: { transactions: transaction },
     },
     { new: true },
     (err, updatedBalance) => {
@@ -64,10 +73,21 @@ router.put("/pay-bill", (req, res) => {
 router.put("/transfer", (req, res) => {
   const { amount, account1, account2 } = req.body;
   const neg = -Math.abs(amount);
+  const transaction1 = {
+    amount: neg,
+    transaction: "transfer sent",
+    date: Date(),
+  };
+  const transaction2 = {
+    amount: amount,
+    transaction: "transfer received",
+    date: Date(),
+  };
   Account.findOneAndUpdate(
     { _id: account1 },
     {
       $inc: { balance: neg },
+      $push: { transactions: transaction1 },
     },
     { new: true },
     (err, updatedAccount1) => {
@@ -80,6 +100,7 @@ router.put("/transfer", (req, res) => {
           },
           {
             $inc: { balance: amount },
+            $push: { transactions: transaction2 },
           },
           { new: true },
           (err, updatedAccount2) => {
@@ -96,7 +117,6 @@ router.put("/transfer", (req, res) => {
 });
 
 router.put("/default", (req, res) => {
-  console.log(req.body);
   Account.findOneAndUpdate(
     { $and: [{ userID: req.body.sinNumber }, { default: true }] },
     { default: false },
@@ -134,6 +154,16 @@ router.put("/default", (req, res) => {
 router.put("/etransfer", (req, res) => {
   const { account, amount, email } = req.body;
   const neg = -Math.abs(amount);
+  const transaction1 = {
+    amount: neg,
+    transaction: "e-Transfer sent",
+    date: Date(),
+  };
+  const transaction2 = {
+    amount: amount,
+    transaction: "e-Transfer received",
+    date: Date(),
+  };
 
   User.findOne({ username: email }, (err, user) => {
     if (!user || err) {
@@ -150,13 +180,16 @@ router.put("/etransfer", (req, res) => {
             },
           ],
         },
-        { $inc: { balance: amount } },
+        {
+          $inc: { balance: amount },
+          $push: { transactions: transaction2 },
+        },
         { new: true },
         (err, updatedAccount2) => {
           if (!updatedAccount2 || err) {
             return res.json({
               err: true,
-              msg: "Accountholder has not set up an account for e-Transfers",
+              msg: "Account holder has not set up an account for e-Transfers",
             });
           } else {
             Account.findOneAndUpdate(
@@ -165,6 +198,7 @@ router.put("/etransfer", (req, res) => {
               },
               {
                 $inc: { balance: neg },
+                $push: { transactions: transaction1 },
               },
               { new: true },
               (err, updatedAccount1) => {

@@ -91,9 +91,9 @@ function Dashboard() {
                 .filter((account) => account.type === "savings")
                 .map((account) => (
                   <Link
+                    className="account"
                     key={account._id}
                     to={`/account/${account.id}`}
-                    className="account"
                   >
                     <h3 className="account-type">
                       Everyday Savings
@@ -124,9 +124,9 @@ function Dashboard() {
                 .filter((account) => account.type === "investment")
                 .map((account) => (
                   <Link
+                    className="account"
                     key={account._id}
                     to={`/account/${account.id}`}
-                    className="account"
                   >
                     <h3 className="account-type">
                       TFSA
