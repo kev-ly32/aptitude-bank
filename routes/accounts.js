@@ -24,7 +24,11 @@ router.post("/new-account", (req, res) => {
 
 router.put("/deposit", (req, res) => {
   const { balance, id } = req.body;
-  const transaction = { amount: balance, transaction: "Deposit", date: Date() };
+  const transaction = {
+    amount: balance,
+    transaction: "Deposit",
+    date: new Date(),
+  };
   Account.findOneAndUpdate(
     { _id: id },
     {

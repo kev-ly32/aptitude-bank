@@ -40,6 +40,13 @@ function AccountDetails() {
       </section>
       <section className="dashboard-main">
         <h1>Transactions</h1>
+        {currentAcc.transactions.map((transaction) => (
+          <div key={transaction._id} className="account">
+            <h3>{transaction.amount}</h3>
+            <h3>{transaction.transaction}</h3>
+            <h3>{new Date(transaction.date).toDateString()}</h3>
+          </div>
+        ))}
       </section>
     </div>
   );
