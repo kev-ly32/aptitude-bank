@@ -1,19 +1,12 @@
-import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
-import "../../public/stylesheets/Dashboard.css";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import "../../public/stylesheets/Transactions.css";
 
-import {
-  addAccount,
-  fetchAccounts,
-  selectAccount,
-} from "../../reducers/Account/accountSlice";
-import { selectUser } from "../../reducers/Authentication/userSlice";
+import { selectAccount } from "../../reducers/Account/accountSlice";
 
 function AccountDetails() {
   let { id } = useParams();
-  const user = useSelector(selectUser);
   const allAccounts = useSelector(selectAccount);
 
   const [currentAcc] = allAccounts.filter((account) => account.id === id);
@@ -40,13 +33,54 @@ function AccountDetails() {
       </section>
       <section className="dashboard-main">
         <h1>Transactions</h1>
-        {currentAcc.transactions.map((transaction) => (
-          <div key={transaction._id} className="account">
-            <h3>{transaction.amount}</h3>
-            <h3>{transaction.transaction}</h3>
-            <h3>{new Date(transaction.date).toDateString()}</h3>
-          </div>
-        ))}
+        <table className="transactions">
+          <thead>
+            <tr className="header">
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Debit</th>
+              <th>Credit</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentAcc.transactions.map((transaction) => (
+              <tr key={transaction._id}>
+                <td>{new Date(transaction.date).toDateString()}</td>
+                <td>{transaction.transaction}</td>
+                <td>
+                  {transaction.amount * 1 > 0
+                    ? (transaction.amount / 100).toLocaleString("en-EN", {
+                        style: "decimal",
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : null}
+                </td>
+                <td>
+                  {transaction.amount * 1 < 0
+                    ? ((transaction.amount * -1) / 100).toLocaleString(
+                        "en-EN",
+                        {
+                          style: "decimal",
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }
+                      )
+                    : null}
+                </td>
+                <td>
+                  {(transaction.newBalance / 100).toLocaleString("en-EN", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </section>
     </div>
   );

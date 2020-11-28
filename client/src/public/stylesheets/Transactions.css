@@ -1,0 +1,24 @@
+.transactions {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin-top: 30px;
+}
+
+.header {
+  background: rgb(241, 241, 241);
+  height: 50px;
+}
+
+tr {
+  height: 25px;
+}
+
+td {
+  font-weight: 400;
+}
+
+tr:nth-child(even) {
+  background: rgb(241, 241, 241);
+}

@@ -68,7 +68,7 @@ function Deposit() {
             <select
               id="account"
               name="accountID"
-              value={accountInfo.name}
+              value={accountInfo.accountID}
               onChange={handleChange}
               className={err && accountInfo.accountID === "" ? "error" : null}
             >

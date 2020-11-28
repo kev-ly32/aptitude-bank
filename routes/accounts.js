@@ -1,3 +1,5 @@
+const { update } = require("../models/User");
+
 const express = require("express"),
   router = express.Router(),
   User = require("../models/User"),
@@ -24,26 +26,32 @@ router.post("/new-account", (req, res) => {
 
 router.put("/deposit", (req, res) => {
   const { balance, id } = req.body;
-  const transaction = {
-    amount: balance,
-    transaction: "Deposit",
-    date: new Date(),
-  };
-  Account.findOneAndUpdate(
-    { _id: id },
-    {
-      $inc: { balance },
-      $push: { transactions: transaction },
-    },
-    { new: true },
-    (err, updatedBalance) => {
-      if (err) {
-        res.json({ error: "Balance was not updated. Please try again." });
-      } else {
-        res.json(updatedBalance);
+  Account.findOne({ _id: id }, (err, account) => {
+    const updatedBalance = account.balance + balance;
+
+    Account.findOneAndUpdate(
+      { _id: id },
+      {
+        $inc: { balance },
+        $push: {
+          transactions: {
+            amount: balance,
+            transaction: "Deposit",
+            date: new Date(),
+            newBalance: updatedBalance,
+          },
+        },
+      },
+      { new: true },
+      (err, updatedBalance) => {
+        if (err) {
+          res.json({ error: "Balance was not updated. Please try again." });
+        } else {
+          res.json(updatedBalance);
+        }
       }
-    }
-  );
+    );
+  });
 });
 
 router.put("/pay-bill", (req, res) => {

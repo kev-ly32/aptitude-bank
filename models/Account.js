@@ -19,6 +19,7 @@ const AccountSchema = new mongoose.Schema({
       amount: Number,
       transaction: String,
       date: Date,
+      newBalance: Number,
     },
   ],
   default: {
