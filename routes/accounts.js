@@ -57,29 +57,35 @@ router.put("/deposit", (req, res) => {
 router.put("/pay-bill", (req, res) => {
   const { balance, id } = req.body;
   const neg = -Math.abs(balance);
-  const transaction = {
-    amount: neg,
-    transaction: "Bill Payment",
-    date: Date(),
-  };
-  Account.findOneAndUpdate(
-    { _id: id },
-    {
-      $inc: { balance: neg },
-      $push: { transactions: transaction },
-    },
-    { new: true },
-    (err, updatedBalance) => {
-      if (err) {
-        return res.json({
-          err: true,
-          msg: `Payment must not exceed current balance.`,
-        });
-      } else {
-        res.json(updatedBalance);
+  Account.findOne({ _id: id }, (err, account) => {
+    const updatedBalance = account.balance + neg;
+
+    Account.findOneAndUpdate(
+      { _id: id },
+      {
+        $inc: { balance: neg },
+        $push: {
+          transactions: {
+            amount: neg,
+            transaction: "Bill Payment",
+            date: Date(),
+            newBalance: updatedBalance,
+          },
+        },
+      },
+      { new: true },
+      (err, updatedBalance) => {
+        if (err) {
+          return res.json({
+            err: true,
+            msg: `Payment must not exceed current balance.`,
+          });
+        } else {
+          res.json(updatedBalance);
+        }
       }
-    }
-  );
+    );
+  });
 });
 
 router.put("/transfer", (req, res) => {
@@ -87,12 +93,12 @@ router.put("/transfer", (req, res) => {
   const neg = -Math.abs(amount);
   const transaction1 = {
     amount: neg,
-    transaction: "transfer sent",
+    transaction: "Transfer sent",
     date: Date(),
   };
   const transaction2 = {
     amount: amount,
-    transaction: "transfer received",
+    transaction: "Transfer received",
     date: Date(),
   };
   Account.findOneAndUpdate(
