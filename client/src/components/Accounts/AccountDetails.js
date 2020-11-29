@@ -38,8 +38,8 @@ function AccountDetails() {
             <tr className="header">
               <th>Date</th>
               <th>Transaction</th>
-              <th>Debit</th>
-              <th>Credit</th>
+              <th>Deposits</th>
+              <th>Withdrawals</th>
               <th>Balance</th>
             </tr>
           </thead>

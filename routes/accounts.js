@@ -1,5 +1,3 @@
-const { update } = require("../models/User");
-
 const express = require("express"),
   router = express.Router(),
   User = require("../models/User"),
@@ -91,47 +89,63 @@ router.put("/pay-bill", (req, res) => {
 router.put("/transfer", (req, res) => {
   const { amount, account1, account2 } = req.body;
   const neg = -Math.abs(amount);
-  const transaction1 = {
-    amount: neg,
-    transaction: "Transfer sent",
-    date: Date(),
-  };
-  const transaction2 = {
-    amount: amount,
-    transaction: "Transfer received",
-    date: Date(),
-  };
-  Account.findOneAndUpdate(
-    { _id: account1 },
-    {
-      $inc: { balance: neg },
-      $push: { transactions: transaction1 },
-    },
-    { new: true },
-    (err, updatedAccount1) => {
-      if (err) {
-        return res.json({ err: true, msg: "Error transferring money." });
-      } else {
-        Account.findOneAndUpdate(
-          {
-            _id: account2,
+  let updated1 = 0;
+  let updated2 = 0;
+  Account.findOne({ _id: account1 }, (err, account) => {
+    updated1 = account.balance + neg;
+    Account.findOne({ _id: account2 }, (err, account) => {
+      updated2 = account.balance + amount;
+
+      Account.findOneAndUpdate(
+        { _id: account1 },
+        {
+          $inc: { balance: neg },
+          $push: {
+            transactions: {
+              amount: neg,
+              transaction: "Transfer sent",
+              date: Date(),
+              newBalance: updated1,
+            },
           },
-          {
-            $inc: { balance: amount },
-            $push: { transactions: transaction2 },
-          },
-          { new: true },
-          (err, updatedAccount2) => {
-            if (err) {
-              return res.json({ err: true, msg: "Error transferring money." });
-            } else {
-              res.json([updatedAccount1, updatedAccount2]);
-            }
+        },
+        { new: true },
+        (err, updatedAccount1) => {
+          if (err) {
+            return res.json({ err: true, msg: "Error transferring money." });
+          } else {
+            Account.findOneAndUpdate(
+              {
+                _id: account2,
+              },
+              {
+                $inc: { balance: amount },
+                $push: {
+                  transactions: {
+                    amount: amount,
+                    transaction: "Transfer received",
+                    date: Date(),
+                    newBalance: updated2,
+                  },
+                },
+              },
+              { new: true },
+              (err, updatedAccount2) => {
+                if (err) {
+                  return res.json({
+                    err: true,
+                    msg: "Error transferring money.",
+                  });
+                } else {
+                  res.json([updatedAccount1, updatedAccount2]);
+                }
+              }
+            );
           }
-        );
-      }
-    }
-  );
+        }
+      );
+    });
+  });
 });
 
 router.put("/default", (req, res) => {
