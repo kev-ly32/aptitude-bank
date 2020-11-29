@@ -186,65 +186,81 @@ router.put("/default", (req, res) => {
 router.put("/etransfer", (req, res) => {
   const { account, amount, email } = req.body;
   const neg = -Math.abs(amount);
-  const transaction1 = {
-    amount: neg,
-    transaction: "e-Transfer sent",
-    date: Date(),
-  };
-  const transaction2 = {
-    amount: amount,
-    transaction: "e-Transfer received",
-    date: Date(),
-  };
+  let updated1 = 0;
+  let updated2 = 0;
 
   User.findOne({ username: email }, (err, user) => {
     if (!user || err) {
       return res.json({ err: true, msg: "No account with that email" });
     } else {
-      Account.findOneAndUpdate(
-        {
-          $and: [
+      Account.findOne(
+        { $and: [{ userID: user.sinNumber }, { default: true }] },
+        (err, recipientAccount) => {
+          updated2 = recipientAccount.balance + amount;
+          Account.findOneAndUpdate(
             {
-              userID: user.sinNumber,
+              $and: [
+                {
+                  userID: user.sinNumber,
+                },
+                {
+                  default: true,
+                },
+              ],
             },
             {
-              default: true,
+              $inc: { balance: amount },
+              $push: {
+                transactions: {
+                  amount: amount,
+                  transaction: "e-Transfer received",
+                  date: Date(),
+                  newBalance: updated2,
+                },
+              },
             },
-          ],
-        },
-        {
-          $inc: { balance: amount },
-          $push: { transactions: transaction2 },
-        },
-        { new: true },
-        (err, updatedAccount2) => {
-          if (!updatedAccount2 || err) {
-            return res.json({
-              err: true,
-              msg: "Account holder has not set up an account for e-Transfers",
-            });
-          } else {
-            Account.findOneAndUpdate(
-              {
-                _id: account,
-              },
-              {
-                $inc: { balance: neg },
-                $push: { transactions: transaction1 },
-              },
-              { new: true },
-              (err, updatedAccount1) => {
-                if (err) {
-                  return res.json({
-                    err: true,
-                    msg: "Could not send e-Transfer",
-                  });
-                } else {
-                  res.json(updatedAccount1);
-                }
+            { new: true },
+            (err, updatedAccount2) => {
+              if (!updatedAccount2 || err) {
+                return res.json({
+                  err: true,
+                  msg:
+                    "Account holder has not set up an account for e-Transfers",
+                });
+              } else {
+                Account.findOne({ _id: account }, (err, account) => {
+                  updated1 = account.balance + neg;
+                  Account.findOneAndUpdate(
+                    {
+                      _id: account,
+                    },
+                    {
+                      $inc: { balance: neg },
+                      $push: {
+                        transactions: {
+                          amount: neg,
+                          transaction: "e-Transfer sent",
+                          date: Date(),
+                          newBalance: updated1,
+                        },
+                      },
+                    },
+                    { new: true },
+                    (err, updatedAccount1) => {
+                      if (err) {
+                        return res.json({
+                          err: true,
+                          msg: "Could not send e-Transfer",
+                        });
+                      } else {
+                        res.json(updatedAccount1);
+                      }
+                    }
+                  );
+                });
               }
-            );
-          }
+            }
+          );
         }
       );
     }

@@ -110,7 +110,7 @@ function Transfer() {
         </div>
         <div className="form-row">
           <div className="form-item">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email of Recipient</label>
             <input
               autoFocus
               className={`form-input ${
