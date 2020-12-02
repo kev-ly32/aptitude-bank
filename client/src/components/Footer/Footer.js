@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../public/stylesheets/Footer.css";
 
 const socials = ["Facebook", "Twitter", "LinkedIn"];
-const footerNav = ["Accounts", "Investments", "Credit Cards", "Contact"];
+const footerNav = ["Accounts", "Investments", "Credit Cards"];
 
 function Footer() {
   return (
@@ -30,6 +30,9 @@ function Footer() {
               <li>{page}</li>
             </Link>
           ))}
+          <Link className="footer-item" to="/register">
+            <li>Sign up</li>
+          </Link>
         </ul>
       </section>
     </footer>
