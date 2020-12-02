@@ -17,6 +17,22 @@ const LandingProducts = ({ title, content }) => {
 };
 
 function LandingPage() {
+  const openPopup = () => {
+    let popup = document.getElementById("popup");
+    popup.style.display = "block";
+  };
+  const closePopup = () => {
+    let popup = document.getElementById("popup");
+    popup.style.display = "none";
+  };
+
+  window.onclick = (e) => {
+    let popup = document.getElementById("popup");
+    if (e.target === popup) {
+      popup.style.display = "none";
+    }
+  };
+
   return (
     <div>
       <section className="intro-banner">
@@ -29,8 +45,36 @@ function LandingPage() {
               deposit*.
             </h3>
             <Link to="/">
-              <button className="intro-button">Learn More</button>
+              <button
+                href="#popup"
+                id="intro-button"
+                className="intro-button"
+                onClick={openPopup}
+              >
+                Learn More
+              </button>
             </Link>
+            <div id="popup" className="popup">
+              <div className="popup-content">
+                <span className="close" onClick={closePopup}>
+                  &times;
+                </span>
+                <div>
+                  <p>
+                    Open a savings account with Apittude Bank today to earn a{" "}
+                    <b>non-promotional</b> interest rate of 1.90% - 19x higher
+                    than the competition
+                  </p>
+                  <p>
+                    Plus, open both a savings and chequing account and receive a
+                    $300 cash deposit, on us!
+                  </p>
+                </div>
+
+                <p>* Offer ends December 31st, 2021</p>
+                <Link to="/register">Sign up today!</Link>
+              </div>
+            </div>
           </div>
           <img
             className="intro-image"
