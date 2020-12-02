@@ -1,0 +1,33 @@
+.productPageHeader {
+  padding: 40px 90px;
+}
+
+.productPageProducts {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 40px auto 0 auto;
+  padding-bottom: 200px;
+}
+
+.product-container {
+  display: flex;
+  width: 100%;
+  margin: 1% auto;
+  align-items: center;
+  border: 2px solid rgb(216, 216, 216);
+  border-radius: 7px;
+  height: 150px;
+}
+
+.product-description,
+.product-image {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.product-description {
+  flex-direction: column;
+  text-align: center;
+}

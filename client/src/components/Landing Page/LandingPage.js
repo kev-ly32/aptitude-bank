@@ -8,7 +8,7 @@ const LandingProducts = ({ title, content }) => {
       <h2>{title}</h2>
       <h4>{content}</h4>
       <div className="product-link-container">
-        <Link className="product-link" to="/">
+        <Link className="product-link" to="/products">
           <span className="product-link"> Learn More </span>
         </Link>
       </div>
@@ -59,11 +59,11 @@ function LandingPage() {
                 <span className="close" onClick={closePopup}>
                   &times;
                 </span>
-                <div>
+                <div className="popup-main">
                   <p>
                     Open a savings account with Apittude Bank today to earn a{" "}
-                    <b>non-promotional</b> interest rate of 1.90% - 19x higher
-                    than the competition
+                    <b>non-promotional</b> interest rate of 1.90% - up to 100x
+                    higher than the competition
                   </p>
                   <p>
                     Plus, open both a savings and chequing account and receive a
@@ -71,7 +71,9 @@ function LandingPage() {
                   </p>
                 </div>
 
-                <p>* Offer ends December 31st, 2021</p>
+                <p className="popup-finePrint">
+                  * Offer ends December 31st, 2021
+                </p>
                 <Link to="/register">Sign up today!</Link>
               </div>
             </div>

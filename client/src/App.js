@@ -12,6 +12,7 @@ import PayBill from "./components/Accounts/PayBill";
 import Transfer from "./components/Accounts/Transfer";
 import Etransfer from "./components/Accounts/Etransfer";
 import Default from "./components/Accounts/Default";
+import Products from "./components/Landing Page/Products";
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,6 +37,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/" exact component={LandingPage} />
+          <Route path="/products" exact component={Products} />
           <Route path="/login" exact>
             {user ? <Redirect to="/dashboard" /> : <Login />}
           </Route>
