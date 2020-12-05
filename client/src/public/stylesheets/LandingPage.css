@@ -15,13 +15,15 @@
 .intro-text-button {
   width: 50%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .intro-text {
   width: 100%;
   text-align: center;
-  margin-top: 150px;
-  font-size: 45px;
+  font-size: 42px;
 }
 
 .intro-button {
@@ -44,14 +46,14 @@
 }
 
 .intro-image {
-  height: 475px;
+  height: 100%;
   border-top-left-radius: 250px;
 }
 
 .landingPageProducts {
   display: flex;
   height: 500px;
-  width: 55%;
+  width: 60%;
   margin: 0 auto;
   justify-content: space-around;
   align-items: center;
@@ -61,24 +63,25 @@
 .landing-product {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   width: 22%;
-  height: 55%;
+  height: 270px;
   text-align: center;
   border: 2px solid rgb(216, 216, 216);
   border-radius: 7px;
-  /* box-shadow: 0 1px 2px 2px rgb(182, 182, 182); */
 }
 
 .landing-product h2 {
-  margin-top: 25px;
+  /* margin-top: 25px; */
   flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .landing-product h4 {
   width: 80%;
   margin: 0 auto;
-  flex: 3;
+  flex: 2;
 }
 
 .product-link-container {
@@ -139,4 +142,109 @@
 .popup-finePrint {
   font-size: 12px;
   margin: 10px 0 25px 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .intro-banner {
+    height: 375px;
+  }
+  .intro-image {
+    z-index: 0;
+    border-top-left-radius: 180px;
+  }
+  .intro-text {
+    font-size: 35px;
+  }
+  .intro-text-button h3 {
+    font-size: 16px;
+  }
+  .intro-button {
+    height: 35px;
+    width: 110px;
+    font-size: 14px;
+    margin-top: 26px;
+  }
+  .landingPageProducts {
+    height: 450px;
+    width: 75%;
+  }
+  .landing-product h2 {
+    font-size: 21px;
+  }
+  .landing-product h4 {
+    font-size: 14px;
+  }
+  .product-link {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 915px) {
+  .intro-banner {
+    height: 330px;
+  }
+  .intro-text {
+    font-size: 30px;
+  }
+  .intro-text-button h3 {
+    font-size: 14px;
+  }
+  .intro-button {
+    height: 32px;
+    width: 90px;
+    font-size: 12px;
+    margin-top: 24px;
+  }
+  .landingPageProducts {
+    width: 85%;
+  }
+  .landing-product {
+    height: 240px;
+  }
+  .landing-product h2 {
+    font-size: 18px;
+  }
+  .landing-product h4 {
+    font-size: 12px;
+  }
+  .popup-main {
+    font-size: 13px;
+  }
+  .popup-finePrint {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .intro-banner {
+    height: 300px;
+  }
+  .intro-text {
+    font-size: 24px;
+  }
+  .intro-text-button {
+    width: 100%;
+  }
+  .intro-text-button h3 {
+    font-size: 13px;
+  }
+  .intro-image {
+    display: none;
+  }
+  .landingPageProducts {
+    height: 370px;
+    width: 95%;
+  }
+  .landing-product {
+    height: 200px;
+  }
+  .landing-product h2 {
+    font-size: 16px;
+  }
+  .landing-product h4 {
+    font-size: 12px;
+  }
+  .product-link {
+    font-size: 14px;
+  }
 }
