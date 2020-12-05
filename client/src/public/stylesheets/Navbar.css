@@ -13,14 +13,14 @@
 }
 
 .nav-brand {
-  margin-right: 16%;
+  margin-right: 17%;
   text-decoration: none;
   color: white;
-  font-size: 24px;
+  font-size: 23px;
 }
 
 nav {
-  flex: 3;
+  flex: 2;
   display: flex;
 }
 
@@ -129,4 +129,38 @@ nav {
 .register-button:hover {
   background: #eeedff;
   color: #72000a;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-links {
+    margin-left: 200px;
+  }
+  .nav-brand {
+    font-size: 20px;
+  }
+  .login-button,
+  .register-button {
+    width: 75px;
+    height: 25px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 720px) {
+  .nav-links {
+    margin-left: 100px;
+  }
+  .nav-brand {
+    font-size: 17px;
+  }
+  .nav-links {
+    margin: none;
+  }
+}
+@media screen and (max-width: 390px) {
+  .nav-links {
+    margin-left: 50px;
+  }
+  .nav-brand {
+    font-size: 15px;
+  }
 }
