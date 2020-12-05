@@ -12,7 +12,7 @@ footer {
 }
 
 .footer-section {
-  width: 30%;
+  width: 40%;
 }
 
 .footer-social {
@@ -30,4 +30,22 @@ footer {
   list-style: none;
   text-decoration: none;
   color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .footer-section {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 670px) {
+  .footer-section {
+    width: 70%;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 430px) {
+  .footer-section {
+    width: 90%;
+    font-size: 12px;
+  }
 }
