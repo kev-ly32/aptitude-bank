@@ -46,11 +46,6 @@ function Navbar() {
             </ul>
           ) : (
             <ul className="nav-links">
-              <li className="nav-link">
-                <button onClick={handleLogout} className="login-button">
-                  Logout
-                </button>
-              </li>
               <li className="nav-link settings">
                 <div className="settings">
                   <i className="fas fa-cog"></i>
@@ -62,6 +57,11 @@ function Navbar() {
                     </button>
                   </Link>
                 </div>
+              </li>
+              <li className="nav-link">
+                <button onClick={handleLogout} className="login-button">
+                  Logout
+                </button>
               </li>
             </ul>
           )}

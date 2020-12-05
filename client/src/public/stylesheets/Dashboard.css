@@ -52,7 +52,7 @@
 }
 
 i {
-  padding: 0 10px;
+  padding: 0 5px 0 10px;
 }
 
 .addAccount {
@@ -99,4 +99,45 @@ i {
 
 .account-balance {
   color: #72000a;
+}
+
+@media screen and (max-width: 1550px) {
+  .dashboard-main {
+    width: 65%;
+  }
+}
+@media screen and (max-width: 1190px) {
+  .dashboard-button {
+    font-size: 13px;
+  }
+  .dashboard-button i {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .dashboard-intro {
+    font-size: 14px;
+  }
+  .dashboard-main {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 810px) {
+  .dashboard-button {
+    height: 80px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .dashboard-intro {
+    font-size: 12px;
+  }
+  .dashboard-main {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 430px) {
+  .dashboard-intro h1 {
+    width: 40%;
+  }
 }

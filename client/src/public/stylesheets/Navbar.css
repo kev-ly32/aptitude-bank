@@ -13,21 +13,23 @@
 }
 
 .nav-brand {
-  margin-right: 17%;
+  width: 15%;
+  /* margin-right: 50px; */
   text-decoration: none;
   color: white;
   font-size: 23px;
 }
 
 nav {
-  flex: 2;
+  width: 90%;
   display: flex;
+  justify-content: flex-end;
 }
 
 .nav-links {
   display: flex;
   width: 50%;
-  margin-left: 500px;
+  margin-left: 300px;
   justify-content: flex-end;
   align-items: center;
 }
@@ -131,12 +133,20 @@ nav {
   color: #72000a;
 }
 
+@media screen and (max-width: 1224px) {
+  .nav-brand {
+    width: 25%;
+  }
+}
 @media screen and (max-width: 1024px) {
   .nav-links {
     margin-left: 200px;
   }
   .nav-brand {
     font-size: 20px;
+  }
+  .nav-button {
+    font-size: 17px;
   }
   .login-button,
   .register-button {
@@ -145,9 +155,10 @@ nav {
     font-size: 14px;
   }
 }
-@media screen and (max-width: 720px) {
+
+@media screen and (max-width: 770px) {
   .nav-links {
-    margin-left: 100px;
+    margin-left: 70px;
   }
   .nav-brand {
     font-size: 17px;

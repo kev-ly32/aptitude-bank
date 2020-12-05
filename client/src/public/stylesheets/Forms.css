@@ -1,9 +1,12 @@
+/* .App {
+  padding-bottom: 100px;
+} */
 .auth-form {
   flex-direction: column;
   align-items: center;
   height: auto;
   width: 700px;
-  margin: 100px auto;
+  margin: 100px auto 0 auto;
   box-shadow: 1px 1px 5px 0px #b1b1b1;
 }
 
@@ -146,3 +149,20 @@ option {
 #amount {
   padding: 0 10px;
 }
+
+@media screen and (max-width: 1024px) {
+  .auth-form {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .auth-form {
+    width: 350px;
+  }
+}
+/* @media screen and (max-width: 430px) {
+  .auth-form {
+    width: 300px;
+  }
+} */
