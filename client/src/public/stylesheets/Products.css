@@ -1,16 +1,18 @@
 .productPage {
+  height: 100%;
   background: rgb(224, 224, 224);
 }
 
 .productPageHeader {
   padding: 40px 90px;
-  border-bottom: 2px solid #363636;
+  border-bottom: 1px solid #363636;
+  box-shadow: 0 6px 6px 1px rgb(182, 182, 182);
 }
 
 .productPageProducts {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 50%;
   margin: 60px auto 0 auto;
   padding-bottom: 200px;
 }
@@ -67,4 +69,27 @@
 .far,
 .fas {
   font-size: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  .product-name {
+    font-size: 17px;
+  }
+  .product-info i {
+    font-size: 17px;
+  }
+  .product-description {
+    font-size: 13px;
+  }
+  .product-button {
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .productPageProducts {
+    width: 70%;
+  }
 }
