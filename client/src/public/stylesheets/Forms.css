@@ -160,6 +160,36 @@ option {
   .auth-form {
     width: 350px;
   }
+  .form-header {
+    font-size: 21px;
+  }
+  label {
+    font-size: 15px;
+  }
+  .form-input {
+    height: 30px;
+    font-size: 13px;
+  }
+  .form-email {
+    width: 60%;
+  }
+  .form-sin {
+    width: 36%;
+  }
+  .auth-submit {
+    width: 100px;
+    height: 30px;
+  }
+  #account,
+  #account1,
+  #account2 {
+    font-size: 12px;
+  }
+}
+@media screen and (max-height: 900px) {
+  .App {
+    padding-bottom: 120px;
+  }
 }
 /* @media screen and (max-width: 430px) {
   .auth-form {
